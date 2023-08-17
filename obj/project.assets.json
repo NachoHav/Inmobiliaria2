@@ -1785,11 +1785,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ULP\\net\\test\\test.csproj",
+      "projectUniqueName": "D:\\ULP\\net\\test\\Inmobiliaria2\\test.csproj",
       "projectName": "test",
-      "projectPath": "D:\\ULP\\net\\test\\test.csproj",
+      "projectPath": "D:\\ULP\\net\\test\\Inmobiliaria2\\test.csproj",
       "packagesPath": "C:\\Users\\Nacho\\.nuget\\packages\\",
-      "outputPath": "D:\\ULP\\net\\test\\obj\\",
+      "outputPath": "D:\\ULP\\net\\test\\Inmobiliaria2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
