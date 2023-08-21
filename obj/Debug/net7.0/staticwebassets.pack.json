@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\test.bundle.scp.css"
     },
     {
+      "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\inquilinos.css",
+      "PackagePath": "staticwebassets\\css\\inquilinos.css"
+    },
+    {
+      "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\layout.css",
+      "PackagePath": "staticwebassets\\css\\layout.css"
+    },
+    {
       "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

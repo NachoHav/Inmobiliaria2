@@ -1,16 +1,8 @@
-﻿@model List<test.Models.Propietario>
+﻿@model IEnumerable<test.Models.Propietario>
 @{
     ViewData["Title"] = "Lista de Propietarios";
 }
 
-@* <div class="text-center">
-    <h1 class="display-4">Listado de Personas (@Model.Count)</h1>
-   <ul>
-        @foreach(var p in Model){
-            <li>@p.Nombre</li>
-        }
-   </ul>
-</div> *@
 <!DOCTYPE html>
 <h1>Propietarios</h1>
 
@@ -18,58 +10,63 @@
     <a asp-action="Create">Crear nuevo</a>
 </p>
 <table class="table">
-    <thead>
+
+ <thead>
         <tr>
             <th>
-                Código
+                @Html.DisplayNameFor(model => model.IdPropietario)
             </th>
             <th>
-                Nombre
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                Apellido
+                @Html.DisplayNameFor(model => model.Apellido)
             </th>
             <th>
-                Dni
+                @Html.DisplayNameFor(model => model.Dni)
             </th>
             <th>
-                Teléfono
+                @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
-                Email
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th></th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
-                                <tr>
-                                    <td>
+                                                <tr>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.IdPropietario)
-                                    </td>
-                                    <td>
+                                                        </td>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td>
+                                                        </td>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.Apellido)
-                                    </td>
-                                    <td>
+                                                        </td>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.Dni)
-                                    </td>
-                                    <td>
+                                                        </td>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.Telefono)
-                                    </td>
-                                    <td>
+                                                        </td>
+                                                        <td>
                     @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
+                                                        </td>
+
                 @* <td>
                                 <a asp-action="Edit" asp-route-id="@item.IdPropietario" title="Editar"><span class="lnr lnr-pencil"></span></a>&nbsp;
                                 <a asp-action="Eliminar" asp-route-id="@item.IdPropietario" title="Eliminar"><span class="lnr lnr-cross"></span></a>
                                 <a asp-action="PorPropietario" asp-controller="Inmuebles" asp-route-id="@item.IdPropietario" title="Mis Propiedades"><span class="lnr lnr-apartment"></span></a>
                     @Html.ActionLink("Mis Propiedades", "PorPropietario", "Inmuebles", new { id= item.IdPropietario })
                             </td> *@
-                                </tr>
+
+                                                <td><a asp-action="Delete" asp-route-id="@item.IdPropietario" title="Eliminar"><span class="lnr lnr-cross">asd</span></a></td>
+                                                </tr>
         }
     </tbody>
 </table>

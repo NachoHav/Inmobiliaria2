@@ -65,6 +65,6 @@ public class RepositorioPersona
         return res;
     }
 
-    // public int Baja(Persona)
+
 
 }

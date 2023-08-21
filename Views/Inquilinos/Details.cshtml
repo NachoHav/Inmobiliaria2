@@ -1,0 +1,63 @@
+@model test.Models.Inquilino
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center">Detalles del Inquilino</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">ID del Inquilino</label>
+                        <p class="text-primary">@Html.DisplayFor(model => model.IdInquilino)</p>
+                    </div>
+
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">Nombre</label>
+                        <p>@Html.DisplayFor(model => model.Nombre)</p>
+                    </div>
+
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">Apellido</label>
+                        <p>@Html.DisplayFor(model => model.Apellido)</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">DNI</label>
+                        <p>@Html.DisplayFor(model => model.Dni)</p>
+                    </div>
+
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">Teléfono</label>
+                        <p>@Html.DisplayFor(model => model.Telefono)</p>
+                    </div>
+
+                    <div class="mb-4 text-center">
+                        <label class="fw-bold text-center">Email</label>
+                        <p>
+                            <a style="text-decoration: none; color: black;" href="mailto:@Model.Email">@Model.Email</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.IdInquilino }, new { @class = "btn btn-primary mr-2" })
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>

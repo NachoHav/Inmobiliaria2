@@ -1,0 +1,46 @@
+.explode-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3333c3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+}
+
+.explode-btn:hover {
+    background-color: #5568cf;
+    color: aliceblue;
+    transform: scale(1.2);
+    text-decoration: none;
+}
+
+.custom-link {
+    text-decoration: none;
+    /* Eliminamos la decoración de texto en los enlaces */
+}
+
+.custom-link:hover {
+    transform: scale(1.05);
+    /* Efecto de escalado al pasar el cursor */
+}
+
+.no-underline a {
+    text-decoration: none;
+    color: black;
+}
+
+.custom-input {
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-input:hover {
+    border-color: #66afe9;
+    /* Cambia el color del borde al pasar el mouse */
+    box-shadow: 0 0 18px rgba(102, 175, 233, 0.6);
+    /* Agrega una sombra suave */
+}

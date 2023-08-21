@@ -1,0 +1,57 @@
+@model test.Models.Inquilino
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<hr />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit" class="card shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Editar Inquilino</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label"></label>
+                        <input asp-for="Nombre" class="form-control custom-input" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Apellido" class="form-label"></label>
+                        <input asp-for="Apellido" class="form-control custom-input" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Dni" class="form-label"></label>
+                        <input asp-for="Dni" class="form-control custom-input" />
+                        <span asp-validation-for="Dni" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Telefono" class="form-label"></label>
+                        <input asp-for="Telefono" class="form-control custom-input" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control custom-input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary ml-2">Volver a la Lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,77 +1,52 @@
-﻿@model List<test.Models.Inquilino>
+@model IEnumerable<test.Models.Inquilino>
+
 @{
-    ViewData["Title"] = "Lista de Inquilinos";
+    ViewData["Title"] = "Inquilinos";
 }
 
-@* <div class="text-center">
-    <h1 class="display-4">Listado de Personas (@Model.Count)</h1>
-   <ul>
-        @foreach(var p in Model){
-            <li>@p.Nombre</li>
-        }
-   </ul>
-</div> *@
-<!DOCTYPE html>
-<h1>Inquilinos</h1>
+<h1 class="text-center">Inquilinos</h1>
 
-<p>
-    <a asp-action="Create">Crear nuevo</a>
-</p>
-<table class="table">
-    <thead>
+<a class="explode-btn" asp-action="Create">
+    <i class="fas fa-plus-circle fa-2x"></i>
+</a>
+<table class="table table-bordered table-hover">
+    <thead class="thead-light">
         <tr>
-            <th>
-                Código
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Apellido
-            </th>
-            <th>
-                Dni
-            </th>
-            <th>
-                Teléfono
-            </th>
-            <th>
-                Email
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.IdInquilino)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Apellido)</th>
+            <th>@Html.DisplayNameFor(model => model.Dni)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-                                            <tr>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.IdInquilino)
-                                                </td>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                                                </td>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.Apellido)
-                                                </td>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.Dni)
-                                                </td>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.Telefono)
-                                                </td>
-                                                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                                                </td>
-                @* <td>
-                                <a asp-action="Edit" asp-route-id="@item.IdPropietario" title="Editar"><span class="lnr lnr-pencil"></span></a>&nbsp;
-                                <a asp-action="Eliminar" asp-route-id="@item.IdPropietario" title="Eliminar"><span class="lnr lnr-cross"></span></a>
-                                <a asp-action="PorPropietario" asp-controller="Inmuebles" asp-route-id="@item.IdPropietario" title="Mis Propiedades"><span class="lnr lnr-apartment"></span></a>
-                    @Html.ActionLink("Mis Propiedades", "PorPropietario", "Inmuebles", new { id= item.IdPropietario })
-                            </td> *@
-                                            </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.IdInquilino)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dni)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                <td class="no-underline">@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>
+                    <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdInquilino })">
+                        <i class="fas fa-edit fa-2x"></i>
+                    </a>
+
+                    <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdInquilino })">
+                        <i class="fas fa-info-circle fa-2x"></i>
+                    </a>
+
+                    <a class="btn btn-danger btn-sm custom-link"
+                        href="@Url.Action("Delete", new { id = item.IdInquilino })">
+                        <i class="fas fa-trash-alt fa-2x"></i>
+                    </a>
+
+
+            </tr>
         }
     </tbody>
 </table>
-</html>
-

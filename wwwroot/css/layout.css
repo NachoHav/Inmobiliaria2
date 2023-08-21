@@ -1,0 +1,45 @@
+body {
+    background-color: #f2f2f2;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: #1877f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #1877f2;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #1565c0;
+}
+
+.nav-item {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.footer {
+    background-color: #f6f7f8;
+    padding: 15px 0;
+    text-align: center;
+}

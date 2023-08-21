@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rtL9XjU3NorzcyS78SfDwGWtynyWIjhSscW1KfH/InI=",
+  "Hash": "Shr8Z3FcbuzM6YHNmo0JE/PusY1/F1Avppd+9D/W5As=",
   "Source": "test",
   "BasePath": "_content/test",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\ULP\\net\\test\\Inmobiliaria2\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\test.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\inquilinos.css",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "css/inquilinos.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\inquilinos.css"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\layout.css",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "css/layout.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\layout.css"
     },
     {
       "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\site.css",
