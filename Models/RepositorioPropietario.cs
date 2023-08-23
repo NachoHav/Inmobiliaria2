@@ -44,11 +44,11 @@ public class RepositorioPropietario
         return res;
     }
 
-    public Propietario ObtenerPropietario(int id)
-    {
-        var res = new Propietario();
 
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+    public Propietario ObtenerPorId(int id)
+    {
+        Propietario propietario = null;
+        using (var connection = new MySqlConnection(connectionString))
         {
             string sql = @"SELECT IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
 					FROM Propietarios
@@ -61,7 +61,7 @@ public class RepositorioPropietario
                 var reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    res = new Propietario
+                    propietario = new Propietario
                     {
                         IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),
                         Nombre = reader.GetString("Nombre"),
@@ -69,13 +69,13 @@ public class RepositorioPropietario
                         Dni = reader.GetString("Dni"),
                         Telefono = reader.GetString("Telefono"),
                         Email = reader.GetString("Email"),
-                        Clave = reader.GetString("Clave"),
+                        Clave = reader.GetString("Clave")
                     };
                 }
                 connection.Close();
             }
         }
-        return res;
+        return propietario;
     }
 
     public int Alta(Propietario propietario)
@@ -128,41 +128,30 @@ public class RepositorioPropietario
         return res;
     }
 
-    // public int Baja(int id)
-    // 	{
-    // 		int res = -1;
-    // 		using (SqlConnection connection = new SqlConnection(connectionString))
-    // 		{
-    // 			string sql = "DELETE FROM Propietarios WHERE IdPropietario = @id";
-    // 			using (SqlCommand command = new SqlCommand(sql, connection))
-    // 			{
-    // 				command.CommandType = CommandType.Text;
-    // 				command.Parameters.AddWithValue("@id", id);
-    // 				connection.Open();
-    // 				res = command.ExecuteNonQuery();
-    // 				connection.Close();
-    // 			}
-    // 		}
-    // 		return res;
-    // 	}
 
-    public int Modificacion(Propietario p)
+    public int Editar(Propietario propietario)
     {
         var res = -1;
 
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
-            string sql = "UPDATE Propietarios SET Nombre = @Nombre, Apellido = @Apellido, Dni = @Dni, Telefono = @Telefono, Email = @Email WHERE Id = @Id";
+            var sql = @"UPDATE Propietarios 
+                    SET Nombre = @Nombre, Apellido = @Apellido, Dni = @Dni, 
+                        Telefono = @Telefono, Email = @Email, Clave = @Clave
+                    WHERE IdPropietario = @IdPropietario";
+
             using (MySqlCommand cmd = new MySqlCommand(sql, connection))
             {
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", p.IdPropietario);
-                cmd.Parameters.AddWithValue("@Nombre", p.Nombre);
-                cmd.Parameters.AddWithValue("@Apellido", p.Apellido);
-                cmd.Parameters.AddWithValue("@Dni", p.Dni);
-                cmd.Parameters.AddWithValue("@Telefono", p.Telefono);
-                cmd.Parameters.AddWithValue("@Email", p.Email);
+                cmd.Parameters.AddWithValue("@IdPropietario", propietario.IdPropietario);
+                cmd.Parameters.AddWithValue("@Nombre", propietario.Nombre);
+                cmd.Parameters.AddWithValue("@Apellido", propietario.Apellido);
+                cmd.Parameters.AddWithValue("@Dni", propietario.Dni);
+                cmd.Parameters.AddWithValue("@Telefono", propietario.Telefono);
+                cmd.Parameters.AddWithValue("@Email", propietario.Email.ToString());
+                cmd.Parameters.AddWithValue("@Clave", propietario.Clave);
+
                 connection.Open();
+
                 res = cmd.ExecuteNonQuery();
                 connection.Close();
             }

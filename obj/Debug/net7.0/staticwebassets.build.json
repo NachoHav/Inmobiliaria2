@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Shr8Z3FcbuzM6YHNmo0JE/PusY1/F1Avppd+9D/W5As=",
+  "Hash": "CP9lPQPEO1O/NDBn4mmKOtL1PsCSGd6mEI4vGlJqWVI=",
   "Source": "test",
   "BasePath": "_content/test",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\js\\layout.js",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "js/layout.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\layout.js"
     },
     {
       "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\js\\site.js",

@@ -1,54 +1,59 @@
-﻿@model List<test.Models.Propietario>
+@model IEnumerable<test.Models.Propietario>
+
 @{
-    ViewData["Title"] = "Crear Propietario";
+    ViewData["Title"] = "Create";
 }
+
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="">
-                <div class="text-center">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white text-center">
                     <h1 class="display-4">Crear Propietario</h1>
                 </div>
-                <form asp-action="Create">
-                    <div class="form-group mb-3">
-                        <label for="fNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="fNombre" name="Nombre" required>
-                    </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div class="mb-3">
+                            <label for="fNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control custom-input" id="fNombre" name="Nombre" required>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="fApellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="fApellido" name="Apellido" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fApellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control custom-input" id="fApellido" name="Apellido"
+                                required>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="fDni" class="form-label">Dni</label>
-                        <input type="text" class="form-control" id="fDni" name="Dni" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fDni" class="form-label">Dni</label>
+                            <input type="text" class="form-control custom-input" id="fDni" name="Dni" required>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="fTelefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="fTelefono" name="Telefono" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fTelefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control custom-input" id="fTelefono" name="Telefono"
+                                required>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="fEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="fEmail" name="Email" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control custom-input" id="fEmail" name="Email" required>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="fClave" class="form-label">Clave</label>
-                        <input type="password" class="form-control" id="fClave" name="Clave" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fClave" class="form-label">Clave</label>
+                            <input type="password" class="form-control custom-input" id="fClave" name="Clave" required>
+                        </div>
 
-                    <div class="text-center">
-                        <button class="btn btn-custom">Guardar</button>
-                    </div>
-                </form>
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg explode-btn">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-

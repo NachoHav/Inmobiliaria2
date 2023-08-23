@@ -7,7 +7,7 @@ namespace test.Controllers;
 public class PropietariosController : Controller
 {
 
-    private readonly RepositorioPropietario repositorio;
+    private readonly RepositorioPropietario repositorio = new RepositorioPropietario();
 
     private readonly ILogger<PropietariosController> _logger;
 
@@ -41,8 +41,8 @@ public class PropietariosController : Controller
     {
         try
         {
-            RepositorioPropietario rp = new RepositorioPropietario();
-            rp.Alta(propietario);
+
+            repositorio.Alta(propietario);
             return RedirectToAction("Index");
         }
         catch (Exception e)
@@ -53,55 +53,51 @@ public class PropietariosController : Controller
 
     public ActionResult Edit(int id)
     {
-        try
-        {
-            var propietario = repositorio.ObtenerPropietario(id);
-            return View(propietario);
-        }
-        catch (Exception e)
-        {
-            throw;
-        }
+        var propietario = repositorio.ObtenerPorId(id);
+        ViewBag.Propietarios = repositorio.ObtenerPropietarios();
+        if (TempData.ContainsKey("Mensaje"))
+            ViewBag.Mensaje = TempData["Mensaje"];
+        if (TempData.ContainsKey("Error"))
+            ViewBag.Error = TempData["Error"];
+
+        return View(propietario);
     }
 
+    // POST: Inmueble/Edit/5
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public ActionResult Edit(int id, Propietario propietario)
     {
-        Propietario p = null;
         try
         {
-            p = repositorio.ObtenerPropietario(id);
-            p.Nombre = propietario.Nombre;
-            p.Apellido = propietario.Apellido;
-            p.Dni = propietario.Dni;
-            p.Telefono = propietario.Telefono;
-            p.Email = propietario.Email;
-            repositorio.Modificacion(p);
-            TempData["Mensaje"] = "Datos guardados!";
+            propietario.IdPropietario = id;
+            repositorio.Editar(propietario);
+            TempData["Mensaje"] = "Datos guardados correctamente";
             return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            throw;
-        }
-    }
-
-    public ActionResult Delete()
-    {
-        try
-        {
-            return View();
         }
         catch (Exception ex)
         {
-            ViewBag.ErrorMessage = "Ocurrió un error al intentar eliminar el propietario.";
-            return View(nameof(Index));
+            ViewBag.Propietarios = repositorio.ObtenerPropietarios();
+            ViewBag.Error = ex.Message;
+            ViewBag.StackTrate = ex.StackTrace;
+            return View(propietario);
         }
     }
 
+    public ActionResult Delete(int id)
+    {
+        var propietario = repositorio.ObtenerPorId(id);
+        if (TempData.ContainsKey("Mensaje"))
+            ViewBag.Mensaje = TempData["Mensaje"];
+        if (TempData.ContainsKey("Error"))
+            ViewBag.Error = TempData["Error"];
+        return View(propietario);
+    }
+
+    // POST: Inmueble/Eliminar/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id)
+    public ActionResult Delete(int id, Propietario propietario)
     {
         try
         {
@@ -111,8 +107,16 @@ public class PropietariosController : Controller
         }
         catch (Exception ex)
         {
-            throw;
+            ViewBag.Error = ex.Message;
+            ViewBag.StackTrate = ex.StackTrace;
+            return View(propietario);
         }
+    }
+
+    public ActionResult Details(int id)
+    {
+        var propietario = repositorio.ObtenerPorId(id);
+        return View(propietario);
     }
 
 }

@@ -81,7 +81,7 @@ public class InquilinosController : Controller
     public ActionResult Edit(int id)
     {
         var entidad = ri.ObtenerPorId(id);
-        ViewBag.Propietarios = ri.ObtenerInquilinos();
+        ViewBag.Inquilinos = ri.ObtenerInquilinos();
         if (TempData.ContainsKey("Mensaje"))
             ViewBag.Mensaje = TempData["Mensaje"];
         if (TempData.ContainsKey("Error"))

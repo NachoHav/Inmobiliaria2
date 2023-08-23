@@ -1,56 +1,51 @@
 @model test.Models.Propietario
 
 @{
-    ViewData["Title"] = "Eliminar";
+    ViewData["Title"] = "Delete";
 }
+<h3 class="text-center">¿Estás seguro de que deseas eliminar?</h3>
+<hr>
 
-<h1>Eliminar</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4 class="mb-0">Eliminar Propietario</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-end">ID del Propietario</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.IdPropietario)</dd>
 
-<h3>¿Seguro que desea eliminar el propietario?</h3>
-<div>
-    <h4>Propietario</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPropietario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPropietario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dni)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dni)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver al listado</a>
-    </form>
+                        <dt class="col-sm-4 text-end">Nombre</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                        <dt class="col-sm-4 text-end">Apellido</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Apellido)</dd>
+
+                        <dt class="col-sm-4 text-end">DNI</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Dni)</dd>
+
+                        <dt class="col-sm-4 text-end">Teléfono</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefono)</dd>
+
+                        <dt class="col-sm-4 text-end">Email</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+                        <dt class="col-sm-4 text-end">Clave</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Clave)</dd>
+                    </dl>
+
+                    <div class="text-center mt-4">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="IdPropietario" />
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
