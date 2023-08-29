@@ -97,7 +97,7 @@ aria-expanded="false" aria-label="Toggle navigation">
                                 asp-action="Index">Inicio</a>
                         </li>
 
-                        <li class="nav-item dropdown dropdown-hover"> <!-- Agregamos la clase dropdown-hover -->
+                        <li class="nav-item dropdown dropdown-hover">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="propietariosDropdown"
                                 role="button" aria-expanded="false">
                                 Propietarios
@@ -114,7 +114,7 @@ aria-expanded="false" aria-label="Toggle navigation">
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown dropdown-hover"> <!-- Agregamos la clase dropdown-hover -->
+                        <li class="nav-item dropdown dropdown-hover">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="inquilinosDropdown" role="button"
                                 aria-expanded="false">
                                 Inquilinos
@@ -130,7 +130,22 @@ aria-expanded="false" aria-label="Toggle navigation">
                                 </li>
                             </ul>
                         </li>
-
+                        <li class="nav-item dropdown dropdown-hover">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="propiedadesDropdown"
+                                role="button" aria-expanded="false">
+                                Propiedades
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="inquilinosDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Propiedades"
+                                        asp-action="Index">Ver Propiedades</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Propiedades"
+                                        asp-action="Create">Crear Propiedad</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -142,7 +157,7 @@ aria-expanded="false" aria-label="Toggle navigation">
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class=" bg-light footer text-muted">
         <div class="container">
             &copy; 2023 - test - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

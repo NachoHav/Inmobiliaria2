@@ -2,9 +2,16 @@
 
 @{
     ViewData["Title"] = "Propietarios";
+    var prevPage = Model.Count() > 0 ? ViewBag.CurrentPage - 1 : ViewBag.CurrentPage;
+    var nextPage = ViewBag.CurrentPage + 1;
 }
 
 <h1 class="text-center">Propietarios</h1>
+<div class="form-group">
+    <input type="text" class="form-control" id="searchInput" placeholder="Buscar propietario">
+</div>
+
+
 <a class="explode-btn" asp-action="Create">
     <i class="fas fa-plus-circle fa-2x"></i>
 </a>
@@ -20,32 +27,96 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.IdPropietario)</td>
-                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
-                <td>@Html.DisplayFor(modelItem => item.Dni)</td>
-                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                <td class="no-underline">@Html.DisplayFor(modelItem => item.Email)</td>
-                <td>
-                    <a class="btn btn-primary btn-sm custom-link"
-                        href="@Url.Action("Edit", new { id = item.IdPropietario })">
-                        <i class="fas fa-edit fa-2x"></i>
-                    </a>
-
-                    <a class="btn btn-info btn-sm custom-link"
-                        href="@Url.Action("Details", new { id = item.IdPropietario })">
-                        <i class="fas fa-info-circle fa-2x"></i>
-                    </a>
-
-                    <a class="btn btn-danger btn-sm custom-link"
-                        href="@Url.Action("Delete", new { id = item.IdPropietario })">
-                        <i class="fas fa-trash-alt fa-2x"></i>
-                    </a>
-            </tr>
-        }
+    <tbody id="propTableBody">
+        @await Html.PartialAsync("_PropietarioTablePartial", Model)
     </tbody>
+
 </table>
+
+<div class="d-flex justify-content-center mb-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = prevPage, pageSize = ViewBag.PageSize })"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })">@i</a>
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = nextPage, pageSize = ViewBag.PageSize })"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+@section scripts {
+    <script>
+        @* $(document).ready(function () {
+        $('#searchInput').on('input', function () {
+        var searchTerm = $(this).val();
+
+        $.ajax({
+        url: '@Url.Action("Search", "Propietarios")',
+        type: 'GET',
+        data: { searchTerm: searchTerm },
+        success: function (data) {
+        // Actualizar la tabla con los resultados de búsqueda
+        $('#propTableBody').html(data);
+        }
+        });
+        });
+        }); *@
+            $(document).ready(function () {
+                var currentPage = 1;
+                var pageSize = 10; // Número de resultados por página
+
+                $('#searchInput').on('input', function () {
+                    var searchTerm = $(this).val();
+
+                    $.ajax({
+                        url: '@Url.Action("Search", "Propietarios")',
+                        type: 'GET',
+                        data: { searchTerm: searchTerm },
+                        success: function (data) {
+                            $('#propTableBody').html(data);
+
+                            // Actualizar la información del paginador
+                            var totalResults = $('#propTableBody').find('tr').length;
+                            var totalPages = Math.ceil(totalResults / pageSize);
+
+                            $('#pagination').empty();
+                            for (var i = 1; i <= totalPages; i++) {
+                                $('#pagination').append($('<li>').addClass('page-item')
+                                    .append($('<a>').addClass('page-link').text(i).attr('data-page', i)));
+                            }
+                        }
+                    });
+
+                    // Restablecer el paginador a la página 1
+                    currentPage = 1;
+                });
+
+                // Manejar la paginación
+                $(document).on('click', '#pagination .page-link', function () {
+                    currentPage = parseInt($(this).attr('data-page'));
+                    // Realizar otra búsqueda o cargar resultados según la página seleccionada
+                });
+            });
+    </script>
+}

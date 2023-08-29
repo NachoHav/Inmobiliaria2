@@ -48,6 +48,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vc1xQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[d:/ULP/net/test/Inmobiliaria2/Views/Propiedades/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGllZGFkZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ULP/net/test/Inmobiliaria2/Views/Propiedades/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGllZGFkZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ULP/net/test/Inmobiliaria2/Views/Propiedades/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGllZGFkZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ULP/net/test/Inmobiliaria2/Views/Propiedades/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGllZGFkZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ULP/net/test/Inmobiliaria2/Views/Propiedades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGllZGFkZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [d:/ULP/net/test/Inmobiliaria2/Views/Propietarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +94,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [d:/ULP/net/test/Inmobiliaria2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ULP/net/test/Inmobiliaria2/Views/Shared/_PropietarioTablePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9waWV0YXJpb1RhYmxlUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [d:/ULP/net/test/Inmobiliaria2/Views/Shared/_ValidationScriptsPartial.cshtml]

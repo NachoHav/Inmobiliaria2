@@ -1,25 +1,29 @@
-@model IEnumerable<test.Models.Inquilino>
+@model IEnumerable<test.Models.Propiedad>;
 
 @{
-    ViewData["Title"] = "Inquilinos";
+    ViewData["Title"] = "Propiedades";
     var prevPage = Model.Count() > 0 ? ViewBag.CurrentPage - 1 : ViewBag.CurrentPage;
     var nextPage = ViewBag.CurrentPage + 1;
 }
 
-<h1 class="text-center">Inquilinos</h1>
 
+
+<h1 class="text-center">Propiedades</h1>
 <a class="explode-btn" asp-action="Create">
     <i class="fas fa-plus-circle fa-2x"></i>
 </a>
-<table class="table table-bordered table-hover">
+
+<table class="table table-bordered">
     <thead class="thead-light">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.IdInquilino)</th>
+            <th>@Html.DisplayNameFor(model => model.IdPropiedad)</th>
             <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.Apellido)</th>
-            <th>@Html.DisplayNameFor(model => model.Dni)</th>
-            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Precio)</th>
+            <th>@Html.DisplayNameFor(model => model.Direccion)</th>
+            <th>@Html.DisplayNameFor(model => model.Habitaciones)</th>
+            <th>@Html.DisplayNameFor(model => model.Banos)</th>
+            <th>@Html.DisplayNameFor(model => model.Area)</th>
+            <th>@Html.DisplayNameFor(model => model.PropietarioId)</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -27,28 +31,26 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.IdInquilino)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdPropiedad)</td>
                 <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
-                <td>@Html.DisplayFor(modelItem => item.Dni)</td>
-                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                <td class="no-underline">@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>$@Html.DisplayFor(modelItem => item.PrecioFormateado)</td>
+                <td>@Html.DisplayFor(modelItem => item.Direccion)</td>
+                <td>@Html.DisplayFor(modelItem => item.Habitaciones)</td>
+                <td>@Html.DisplayFor(modelItem => item.Banos)</td>
+                <td>@Html.DisplayFor(modelItem => item.Area)m2</td>
+                <td>@($"{item.Duenio.Nombre} {item.Duenio.Apellido} (ID: {item.Duenio.IdPropietario})")</td>
                 <td>
-                    <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdInquilino })">
+                    <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdPropiedad })">
                         <i class="fas fa-edit fa-2x"></i>
                     </a>
-
-
-                    <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdInquilino })">
+                    <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdPropiedad })">
                         <i class="fas fa-info-circle fa-2x"></i>
                     </a>
-
                     <a class="btn btn-danger btn-sm custom-link"
-                        href="@Url.Action("Delete", new { id = item.IdInquilino })">
+                        href="@Url.Action("Delete", new { id = item.IdPropiedad })">
                         <i class="fas fa-trash-alt fa-2x"></i>
                     </a>
-
-
+                </td>
             </tr>
         }
     </tbody>
@@ -85,3 +87,4 @@
         </ul>
     </nav>
 </div>
+

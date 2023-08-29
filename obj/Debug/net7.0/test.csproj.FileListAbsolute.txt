@@ -290,3 +290,16 @@ D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.D
 D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\System.CodeDom.dll
+D:\ULP\net\test\Inmobiliaria2\obj\Debug\net7.0\test.MvcApplicationPartsAssemblyInfo.cs
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\JetBrains.Annotations.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\X.PagedList.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\PagedList.dll
+D:\ULP\net\test\Inmobiliaria2\bin\Debug\net7.0\PagedList.Mvc.dll

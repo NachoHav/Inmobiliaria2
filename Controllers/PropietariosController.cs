@@ -16,19 +16,27 @@ public class PropietariosController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public ActionResult Index(int page = 1, int pageSize = 9)
     {
         try
         {
-            RepositorioPropietario rp = new RepositorioPropietario();
-            var propietarios = rp.ObtenerPropietarios();
-            return View(propietarios);
+            var prop = repositorio.ObtenerPropietarios();
+
+            // Calcular el índice de inicio y tomar los elementos de la página actual.
+            int startIndex = (page - 1) * pageSize;
+            var paginatedProp = prop.Skip(startIndex).Take(pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)prop.Count() / pageSize);
+
+            return View(paginatedProp);
         }
         catch (Exception e)
         {
             throw;
         }
     }
+
 
     [HttpGet]
     public IActionResult Create()
@@ -119,4 +127,21 @@ public class PropietariosController : Controller
         return View(propietario);
     }
 
+
+    public IActionResult Search(string searchTerm)
+    {
+        var propietarios = repositorio.ObtenerPropietarios();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            propietarios = propietarios.Where(p =>
+                p.Nombre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                p.Apellido.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                p.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            // Limitar a 10 resultados
+        }
+        var paginatedPropietarios = propietarios.Take(9);
+        return PartialView("_PropietarioTablePartial", paginatedPropietarios);
+    }
 }

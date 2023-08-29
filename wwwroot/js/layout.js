@@ -9,3 +9,4 @@ dropdownItems.forEach(item => {
         item.querySelector('.dropdown-menu').classList.remove('show');
     });
 });
+

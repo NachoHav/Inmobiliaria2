@@ -158,6 +158,45 @@ public class RepositorioPropietario
         }
         return res;
     }
+    public List<Propietario> BuscarPropietarios(string query)
+    {
+        List<Propietario> propietarios = new List<Propietario>();
+
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            string sql = @"SELECT IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
+                      FROM Propietarios
+                      WHERE Nombre LIKE @query OR Apellido LIKE @query OR Email LIKE @query";
+
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@query", $"%{query}%");
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var propietario = new Propietario
+                    {
+                        IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),
+                        Nombre = reader.GetString("Nombre"),
+                        Apellido = reader.GetString("Apellido"),
+                        Dni = reader.GetString("Dni"),
+                        Telefono = reader.GetString("Telefono"),
+                        Email = reader.GetString("Email"),
+                        Clave = reader.GetString("Clave")
+                    };
+
+                    propietarios.Add(propietario);
+                }
+
+                connection.Close();
+            }
+        }
+
+        return propietarios;
+    }
 
 
 }

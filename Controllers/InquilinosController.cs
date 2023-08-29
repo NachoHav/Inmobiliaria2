@@ -15,13 +15,18 @@ public class InquilinosController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int page = 1, int pageSize = 10)
     {
         try
         {
-            RepositorioInquilino ri = new RepositorioInquilino();
             var inquilinos = ri.ObtenerInquilinos();
-            return View(inquilinos);
+            int startIndex = (page - 1) * pageSize;
+            var paginatedInquilino = inquilinos.Skip(startIndex).Take(pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)inquilinos.Count() / pageSize);
+
+            return View(paginatedInquilino);
         }
         catch (Exception e)
         {

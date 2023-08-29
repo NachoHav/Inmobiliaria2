@@ -1,0 +1,158 @@
+@model test.Models.Propiedad
+
+@{
+    ViewData["Title"] = "Crear Propiedad";
+    var listaPropietarios = (IList<Propietario>)ViewBag.Propietarios;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white text-center">
+                    <h1 class="display-4">Crear Propiedad</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div class="mb-3">
+                            <label for="fNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control custom-input" id="fNombre" name="Nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fDescripcion" class="form-label">Descripcion</label>
+                            <input type="text" class="form-control custom-input" id="fDescripcion" name="Descripcion"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fPrecio" class="form-label">Precio</label>
+                            <input type="text" class="form-control custom-input" id="fPrecio" name="Precio" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fDireccion" class="form-label">Direccion</label>
+                            <input type="text" class="form-control custom-input" id="fDireccion" name="Direccion"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fHabitaciones" class="form-label">Habitaciones</label>
+                            <input type="text" class="form-control custom-input" id="fHabitaciones" name="Habitaciones"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fBanos" class="form-label">Baños</label>
+                            <input type="number" class="form-control custom-input" id="fBanos" name="Banos" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fArea" class="form-label">Area</label>
+                            <input type="text" class="form-control custom-input" id="fArea" name="Area" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fPropietarioId" class="form-label">Dueño</label>
+                            <select class="form-select custom-input" id="fPropietarioId" name="PropietarioId" required>
+                                <option value="">Selecciona un dueño</option>
+                                @foreach (var propietario in listaPropietarios)
+                                {
+                                    <option value="@propietario.IdPropietario">@propietario.Nombre @propietario.Apellido -
+                                        @propietario.IdPropietario
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg explode-btn">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* <!DOCTYPE html>
+
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width" />
+<title>Create</title>
+</head>
+
+<body>
+
+<h4>Propiedad</h4>
+<hr />
+<div class="row">
+<div class="col-md-4">
+<form asp-action="Create">
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+<label asp-for="IdPropiedad" class="control-label"></label>
+<input asp-for="IdPropiedad" class="form-control" />
+<span asp-validation-for="IdPropiedad" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Nombre" class="control-label"></label>
+<input asp-for="Nombre" class="form-control" />
+<span asp-validation-for="Nombre" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Descripcion" class="control-label"></label>
+<input asp-for="Descripcion" class="form-control" />
+<span asp-validation-for="Descripcion" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Precio" class="control-label"></label>
+<input asp-for="Precio" class="form-control" />
+<span asp-validation-for="Precio" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Direccion" class="control-label"></label>
+<input asp-for="Direccion" class="form-control" />
+<span asp-validation-for="Direccion" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Habitaciones" class="control-label"></label>
+<input asp-for="Habitaciones" class="form-control" />
+<span asp-validation-for="Habitaciones" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Banos" class="control-label"></label>
+<input asp-for="Banos" class="form-control" />
+<span asp-validation-for="Banos" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="Area" class="control-label"></label>
+<input asp-for="Area" class="form-control" />
+<span asp-validation-for="Area" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+<label class="form-check-label">
+<input class="form-check-input" asp-for="PropietarioId" /> @Html.DisplayNameFor(model =>
+model.PropietarioId)
+</label>
+</div>
+<div class="form-group">
+<input type="submit" value="Create" class="btn btn-primary" />
+</div>
+</form>
+</div>
+</div>
+
+<div>
+<a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+
+</html> *@
