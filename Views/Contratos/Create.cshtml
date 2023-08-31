@@ -1,0 +1,62 @@
+@model IEnumerable<test.Models.Contrato>
+
+@{
+    ViewData["Title"] = "Crear Contrato";
+    var listaInquilinos = (IList<Inquilino>)ViewBag.Inquilinos;
+    var listaPropiedades = (IList<Propiedad>)ViewBag.Propiedades;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white text-center">
+                    <h1 class="display-4">Crear Contrato</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div class="mb-3">
+                            <label for="fFechaInicio" class="form-label">Fecha de Inicio</label>
+                            <input type="date" class="form-control custom-input" id="fFechaInicio" name="FechaInicio"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fFechaFin" class="form-label">Fecha de Fin</label>
+                            <input type="date" class="form-control custom-input" id="fFechaFin" name="FechaFin"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fPropiedadId" class="form-label">Propiedad</label>
+                            <select class="form-select custom-input" id="fPropiedadId" name="PropiedadId" required>
+                                <option value="">Selecciona una propiedad</option>
+                                @foreach (var propiedad in listaPropiedades)
+                                {
+                                    <option value="@propiedad.IdPropiedad">@propiedad.Nombre - @propiedad.Direccion</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fInquilinoId" class="form-label">Inquilino</label>
+                            <select class="form-select custom-input" id="fInquilinoId" name="InquilinoId" required>
+                                <option value="">Selecciona un inquilino</option>
+                                @foreach (var inquilino in listaInquilinos)
+                                {
+                                    <option value="@inquilino.IdInquilino">@inquilino.Nombre @inquilino.Apellido</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg explode-btn">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

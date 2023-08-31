@@ -1,0 +1,45 @@
+@model IEnumerable<test.Models.Contrato>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Contratos</h1>
+<a class="explode-btn" asp-action="Create">
+    <i class="fas fa-plus-circle fa-2x"></i>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IdContrato)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaInicio)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaFin) </th>
+            <th>@Html.DisplayNameFor(model => model.PropiedadId)</th>
+            <th>@Html.DisplayNameFor(model => model.InquilinoId)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.IdContrato)</td>
+                <td>@item.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>@item.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>@($"{item.Propiedad.Nombre} (ID: {item.Propiedad.IdPropiedad})")</td>
+                <td>@($"{item.Inquilino.Nombre} {item.Inquilino.Apellido} (ID: {item.Inquilino.IdInquilino})")</td>
+                <td>
+                    <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdContrato })">
+                        <i class="fas fa-edit fa-2x"></i>
+                    </a>
+                    <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdContrato })">
+                        <i class="fas fa-info-circle fa-2x"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm custom-link" href="@Url.Action("Delete", new { id = item.IdContrato })">
+                        <i class="fas fa-trash-alt fa-2x"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

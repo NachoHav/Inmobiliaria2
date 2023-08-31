@@ -22,20 +22,7 @@ namespace Inmobiliaria2.Controllers
         {
             _logger = logger;
         }
-        // // GET: Propiedades
-        // public ActionResult Index()
-        // {
-        //     try
-        //     {
-        //         var propiedades = repositorio.ObtenerPropiedades();
 
-        //         return View(propiedades);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         throw;
-        //     }
-        // }
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
             try

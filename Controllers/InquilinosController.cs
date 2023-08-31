@@ -45,7 +45,6 @@ public class InquilinosController : Controller
     {
         try
         {
-
             ri.Alta(inquilino);
             return RedirectToAction("Index");
         }
