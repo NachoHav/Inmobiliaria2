@@ -146,10 +146,23 @@ aria-expanded="false" aria-label="Toggle navigation">
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contratos"
-                                asp-action="Index">Contratos</a>
+                        <li class="nav-item dropdown dropdown-hover">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="contratosDropdown" role="button"
+                                aria-expanded="false">
+                                Contratos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="contratosDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Contratos"
+                                        asp-action="Index">Ver Contratos</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Contratos"
+                                        asp-action="Create">Crear Contrato</a>
+                                </li>
+                            </ul>
                         </li>
+
                     </ul>
                 </div>
             </div>

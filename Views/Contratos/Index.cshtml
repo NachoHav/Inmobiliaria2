@@ -1,7 +1,7 @@
 @model IEnumerable<test.Models.Contrato>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Contratos";
 }
 
 <h1 class="text-center">Contratos</h1>
@@ -25,7 +25,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.IdContrato)</td>
                 <td>@item.FechaInicio.ToString("dd/MM/yyyy")</td>
-                <td>@item.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>@item.FechaFin.ToString("dd/MM/yyyy")</td>
                 <td>@($"{item.Propiedad.Nombre} (ID: {item.Propiedad.IdPropiedad})")</td>
                 <td>@($"{item.Inquilino.Nombre} {item.Inquilino.Apellido} (ID: {item.Inquilino.IdInquilino})")</td>
                 <td>

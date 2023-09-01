@@ -36,7 +36,8 @@ namespace Inmobiliaria2.Controllers
         // GET: Contratos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var contrato = repositorioContrato.ObtenerPorId(id);
+            return View(contrato);
         }
 
         // GET: Contratos/Create
@@ -75,46 +76,67 @@ namespace Inmobiliaria2.Controllers
         // GET: Contratos/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var contrato = repositorioContrato.ObtenerPorId(id);
+            ViewBag.Inquilinos = repositorioInquilino.ObtenerInquilinos();
+            ViewBag.Propiedades = repositorioPropiedad.ObtenerPropiedades();
+            if (TempData.ContainsKey("Mensaje"))
+                ViewBag.Mensaje = TempData["Mensaje"];
+            if (TempData.ContainsKey("Error"))
+                ViewBag.Error = TempData["Error"];
+            return View(contrato);
         }
 
         // POST: Contratos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Contrato contrato)
         {
             try
             {
                 // TODO: Add update logic here
-
+                contrato.IdContrato = id;
+                repositorioContrato.Editar(contrato);
+                TempData["Mensaje"] = "Edición realizada correctamente";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.Inquilinos = repositorioInquilino.ObtenerInquilinos();
+                ViewBag.Propiedades = repositorioPropiedad.ObtenerPropiedades();
+                ViewBag.Error = e.Message;
+                ViewBag.StackTrate = e.StackTrace;
+                return View(contrato);
             }
         }
 
         // GET: Contratos/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var contrato = repositorioContrato.ObtenerPorId(id);
+            if (TempData.ContainsKey("Mensaje"))
+                ViewBag.Mensaje = TempData["Mensaje"];
+            if (TempData.ContainsKey("Error"))
+                ViewBag.Error = TempData["Error"];
+            return View(contrato);
         }
 
         // POST: Contratos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Contrato contrato)
         {
             try
             {
-                // TODO: Add delete logic here
+                repositorioContrato.Baja(id);
+                TempData["Mensaje"] = "Eliminación realizada correctamente";
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.Error = e.Message;
+                ViewBag.StackTrate = e.StackTrace;
+                return View(contrato);
             }
         }
     }

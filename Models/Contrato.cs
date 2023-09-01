@@ -27,4 +27,7 @@ public class Contrato
 
     public int Estado { get; set; }
 
+    public string FechaInicioFormato => FechaInicio.ToString("dd/MM/yyyy");
+    public string FechaFinFormato => FechaFin.ToString("dd/MM/yyyy");
+
 }

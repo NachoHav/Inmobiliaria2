@@ -1,55 +1,61 @@
 @model test.Models.Contrato
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Contrato";
+    var listaInquilinos = (IList<Inquilino>)ViewBag.Inquilinos;
+    var listaPropiedades = (IList<Propiedad>)ViewBag.Propiedades;
 }
 
-<h1>Edit</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit" class="card shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>Contrato</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdContrato" class="control-label"></label>
-                <input asp-for="IdContrato" class="form-control" />
-                <span asp-validation-for="IdContrato" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
-                <span asp-validation-for="FechaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaFin" class="control-label"></label>
-                <input asp-for="FechaFin" class="form-control" />
-                <span asp-validation-for="FechaFin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PropiedadId" class="control-label"></label>
-                <input asp-for="PropiedadId" class="form-control" />
-                <span asp-validation-for="PropiedadId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InquilinoId" class="control-label"></label>
-                <input asp-for="InquilinoId" class="form-control" />
-                <span asp-validation-for="InquilinoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Editar Contrato</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="IdContrato" class="form-label"></label>
+                        <input asp-for="IdContrato" class="form-control custom-input" readonly="readonly"/>
+                        <span asp-validation-for="IdContrato" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="FechaInicio" class="form-label"></label>
+                        <input type="date" class="form-control custom-input" asp-for="FechaInicio" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="FechaFin" class="form-label"></label>
+                        <input type="date" asp-for="FechaFin" class="form-control custom-input"/>
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="PropiedadId" class="form-label">Propiedad</label>
+                         <select class="form-select" name="PropiedadId">
+                            @foreach (var item in listaPropiedades)
+                            {
+                                @:<option @(item.IdPropiedad==Model.PropiedadId ? "selected" : "") value="@item.IdPropiedad">@(item.Nombre + " - ID: " + item.IdPropiedad)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InquilinoId" class="form-label">Inquilino</label>
+                         <select class="form-select" name="InquilinoId">
+                            @foreach (var item in listaInquilinos)
+                            {
+                                @:<option @(item.IdInquilino==Model.InquilinoId ? "selected" : "") value="@item.IdInquilino">@(item.Nombre + " " + item.Apellido + " - ID: " + item.IdInquilino)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary ml-2">Volver a la Lista</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

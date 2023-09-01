@@ -1,54 +1,62 @@
 @model test.Models.Contrato
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de Contrato";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Contrato</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdContrato)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdContrato)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaFin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaFin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PropiedadId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PropiedadId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InquilinoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InquilinoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center">Detalles del Contrato</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="fw-bold">N° Contrato</label>
+                        <p>@Html.DisplayFor(model => model.IdContrato)</p>
+                        <hr>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold">Inicio</label>
+                        <p>@Html.DisplayFor(model => model.FechaInicioFormato)</p>
+                        <hr>
+                    </div>
+                    <div class="mb-4">
+                        <label class="fw-bold">Propiedad</label>
+                        <p>
+                            @($"{Model.Propiedad.Nombre} (ID: {Model.PropiedadId})")
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="fw-bold">Inquilino</label>
+                        <p>
+                            @($"{Model.Inquilino.Nombre} {Model.Inquilino.Apellido} (ID: {Model.InquilinoId})")
+                        </p>
+                        <hr>
+                    </div>
+                    <div class="mb-4">
+                        <label class="fw-bold">Fin</label>
+                        <p>@Html.DisplayFor(model => model.FechaFinFormato)</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.IdContrato }, new { @class = "btn btn-primary mr-2" })
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
 </div>

@@ -17,6 +17,9 @@ public class RepositorioContrato
     {
         int res = -1;
 
+
+
+
         using (var connection = new MySqlConnection(connectionString))
         {
             string sql = @"INSERT INTO Contratos 
@@ -137,8 +140,8 @@ public class RepositorioContrato
         using (var connection = new MySqlConnection(connectionString))
         {
             string sql = @$"SELECT c.IdContrato, c.FechaInicio, c.FechaFin, c.PropiedadId, c.InquilinoId, c.Estado,
-                            i.Nombre as inquilinoNombre, i.Apellido as inquilinoApellido,
-                            p.Nombre as propiedadNombre, p.Direccion as propiedadDireccion
+                            i.Nombre as inquilinoNombre, i.Apellido as inquilinoApellido, i.IdInquilino,
+                            p.Nombre as propiedadNombre, p.Direccion as propiedadDireccion, p.IdPropiedad
                             FROM Contratos c
                             INNER JOIN Propiedades p ON c.PropiedadId = p.IdPropiedad 
                             INNER JOIN Inquilinos i ON c.InquilinoId = i.IdInquilino
