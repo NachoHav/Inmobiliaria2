@@ -1,10 +1,12 @@
 body {
     background-color: #f2f2f2;
     font-family: 'Arial', sans-serif;
+    background-image: url('~/img/logo.jpg');
+
 }
 
 header {
-    background-color: #1877f2;
+    background-color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,12 +21,12 @@ header {
 }
 
 .nav-link {
-    color: #1877f2;
+    color: white !important;
     transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #1565c0;
+    color: black;
 }
 
 .nav-item {
@@ -39,7 +41,32 @@ header {
 
 
 .footer {
-    background-color: #f6f7f8;
+    background-color: gray;
     padding: 15px 0;
     text-align: center;
+}
+
+
+.navbar-dark .navbar-nav .nav-item.dropdown:hover .nav-link,
+.navbar-dark .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    background-color: #fffafa !important;
+    /* Cambiar el fondo a gris oscuro al pasar el ratón */
+    color: white !important;
+    /* Cambiar el color del texto a blanco al pasar el ratón */
+}
+
+/* Cambiar el color de fondo de los elementos del menú desplegable al pasar el ratón */
+.navbar-dark .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    background-color: #555 !important;
+    /* Cambiar el color de fondo al pasar el ratón sobre los elementos del menú desplegable */
+}
+
+.dropdown-item:hover {
+    background-color: black;
+}
+
+.navbar-logo {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70px;
 }

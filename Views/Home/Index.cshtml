@@ -2,7 +2,54 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card card-with-gradient text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Propiedades en Cartera</h5>
+                    <p class="card-text">Total: 100</p>
+                    <p class="card-text">Disponibles: 80</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-with-gradient text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Contratos Activos</h5>
+                    <p class="card-text">Total: 50</p>
+                    <p class="card-text">Vencen Próximamente: 10</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-with-gradient text-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Inquilinos Registrados</h5>
+                    <p class="card-text">Total: 75</p>
+                    <p class="card-text">Nuevos este Mes: 5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2">
+        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+            <i class="fas  fa-home"></i> Cargar Propiedad
+        </a>
+    </div>
+    <div class="d-grid gap-2 mt-2">
+        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+            <i class="fas  fa-file-contract"></i> Cargar Contrato
+        </a>
+    </div>
+    <div class="d-grid gap-2 mt-2">
+        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+            <i class="fas fa-user-plus"></i> Crear Inquilino
+        </a>
+    </div>
+    <div class="d-grid gap-2 mt-2">
+        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+            <i class="fas fa-user-tie"></i> Crear Propietario
+        </a>
+    </div>
 </div>

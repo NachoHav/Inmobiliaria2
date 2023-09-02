@@ -1,0 +1,47 @@
+@model test.Models.Pago
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit" class="card shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Editar Pago</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="NumeroPago" class="form-label"></label>
+                        <input asp-for="NumeroPago" class="form-control custom-input" readonly="readonly" />
+                        <span asp-validation-for="NumeroPago" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Monto" class="form-label"></label>
+                        <input type="text" class="form-control custom-input" asp-for="Monto" />
+                        <span asp-validation-for="Monto" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Fecha" class="form-label"></label>
+                        <input type="date" asp-for="Fecha" class="form-control custom-input" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ContratoId" class="form-label"></label>
+                        <input type="text" asp-for="ContratoId" class="form-control custom-input" readonly="readonly" />
+                        <span asp-validation-for="ContratoId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <a asp-action="Index" asp-route-id="@Model.ContratoId" class="btn btn-secondary ml-2">Volver a la
+                        Lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

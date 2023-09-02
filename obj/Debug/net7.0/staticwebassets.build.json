@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CP9lPQPEO1O/NDBn4mmKOtL1PsCSGd6mEI4vGlJqWVI=",
+  "Hash": "MZz+pk+ECi5rN0dubdk1bVzgJ9t27Qw6YdrxpY8Vv58=",
   "Source": "test",
   "BasePath": "_content/test",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\ULP\\net\\test\\Inmobiliaria2\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\test.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\home.css",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "css/home.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
       "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\inquilinos.css",
@@ -117,6 +134,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\img\\logo.jpg",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "img/logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo.jpg"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\img\\logo1.jpg",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "img/logo1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo1.jpg"
     },
     {
       "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\js\\layout.js",

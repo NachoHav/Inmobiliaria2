@@ -1,0 +1,54 @@
+@model test.Models.Pago
+
+@{
+    ViewData["Title"] = "Detalles Pago";
+}
+
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center">Detalles del Pago</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="fw-bold">N° Pago</label>
+                        <p>@Html.DisplayFor(model => model.NumeroPago)</p>
+                        <hr>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold">Monto</label>
+                        <p>$@Html.DisplayFor(model => model.Monto)</p>
+                        <hr>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="fw-bold">Contrato</label>
+                        <p>@($"(ID: {Model.ContratoId})")</p>
+                        <hr>
+                    </div>
+                    <div class="mb-4">
+                        <label class="fw-bold">Fecha</label>
+                        <p>@($"{Model.Fecha.ToString("dd/MM/yyyy")}")</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.IdPago }, new { @class = "btn btn-primary mr-2" })
+            <a asp-action="Index" asp-route-id="@Model.ContratoId" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>

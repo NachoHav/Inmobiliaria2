@@ -1,0 +1,17 @@
+/* Estilo para los cards */
+.card-with-gradient {
+    background-image: linear-gradient(to bottom, #333333, #000000);
+    /* Cambia los valores de los colores según tus preferencias */
+}
+
+/* Estilo para los botones */
+.btn-with-gradient {
+    background-image: linear-gradient(to bottom, #333333, #000000);
+    /* Cambia los valores de los colores según tus preferencias */
+    color: rgb(205, 201, 201);
+    /* Para que el texto sea visible en el degradado */
+}
+
+.btn-with-gradient:hover {
+    color: white;
+}

@@ -1,0 +1,45 @@
+@model IEnumerable<test.Models.Pago>
+
+@{
+    ViewData["Title"] = "Index";
+    var id = ViewBag.idContrato;
+}
+
+
+
+
+<h1 class="text-center">Pagos</h1>
+<a class="explode-btn" asp-action="Create" asp-route-id="@id">
+    <i class="fas fa-plus-circle fa-2x"></i>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NumeroPago)</th>
+            <th>@Html.DisplayNameFor(model => model.Monto)</th>
+            <th>@Html.DisplayNameFor(model => model.Fecha) </th>
+            <th>@Html.DisplayNameFor(model => model.ContratoId)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
+                <td>$@item.Monto</td>
+                <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                <td>@item.ContratoId</td>
+                <td>
+                    <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdPago })">
+                        <i class="fas fa-edit fa-2x"></i>
+                    </a>
+                    <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdPago })">
+                        <i class="fas fa-info-circle fa-2x"></i>
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

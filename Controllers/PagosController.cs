@@ -4,39 +4,80 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using test.Models;
 
 namespace Inmobiliaria2.Controllers
 {
     public class PagosController : Controller
     {
-        // GET: Pagos
-        public ActionResult Index()
+
+        private readonly RepositorioPago repositorioPago = new RepositorioPago();
+        private readonly RepositorioContrato repositorioContrato = new RepositorioContrato();
+        private readonly ILogger<PagosController> _logger;
+        public PagosController(ILogger<PagosController> logger)
         {
-            return View();
+            _logger = logger;
+        }
+
+        // GET: Pagos
+        public ActionResult Index(int id)
+        {
+            try
+            {
+                var pagos = repositorioPago.ObtenerPagos(id);
+                ViewBag.idContrato = id;
+
+                return View(pagos);
+
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         // GET: Pagos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                var pago = repositorioPago.ObtenerPago(id);
+                return View(pago);
+            }
+            catch (Exception e)
+            {
+                return View(e.Message);
+            }
+
         }
 
         // GET: Pagos/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            try
+            {
+                ViewBag.Contrato = repositorioContrato.ObtenerPorId(id);
+                return View();
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
         }
 
         // POST: Pagos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Pago pago)
         {
             try
             {
-                // TODO: Add insert logic here
+                var res = repositorioPago.Alta(pago);
+                TempData["Mensaje"] = "Pago registrado correctamente";
 
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Index), new { id = pago.ContratoId });
             }
             catch
             {
@@ -47,23 +88,34 @@ namespace Inmobiliaria2.Controllers
         // GET: Pagos/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
-        }
+            var pago = repositorioPago.ObtenerPago(id);
+            ViewBag.Contrato = repositorioContrato.ObtenerPorId(pago.ContratoId);
+            if (TempData.ContainsKey("Mensaje"))
+                ViewBag.Mensaje = TempData["Mensaje"];
+            if (TempData.ContainsKey("Error"))
+                ViewBag.Error = TempData["Error"];
+            return View(pago);
 
+        }
         // POST: Pagos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Pago pago)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                pago.IdPago = id;
+                repositorioPago.Editar(pago);
+                TempData["Mensaje"] = "Pago actualizado correctamente";
+                return RedirectToAction(nameof(Index), new { id = pago.ContratoId });
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ViewBag.Contrato = repositorioContrato.ObtenerPorId(pago.ContratoId);
+                ViewBag.Error = e.Message;
+                ViewBag.StackTrate = e.StackTrace;
+                return View(pago);
             }
         }
 

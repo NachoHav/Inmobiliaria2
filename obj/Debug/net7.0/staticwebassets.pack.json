@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\test.bundle.scp.css"
     },
     {
+      "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
       "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\css\\inquilinos.css",
       "PackagePath": "staticwebassets\\css\\inquilinos.css"
     },
@@ -19,6 +23,14 @@
     {
       "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\img\\logo.jpg",
+      "PackagePath": "staticwebassets\\img\\logo.jpg"
+    },
+    {
+      "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\img\\logo1.jpg",
+      "PackagePath": "staticwebassets\\img\\logo1.jpg"
     },
     {
       "Id": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\js\\layout.js",

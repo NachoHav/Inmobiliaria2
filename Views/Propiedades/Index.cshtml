@@ -41,15 +41,19 @@
                 <td>@($"{item.Duenio.Nombre} {item.Duenio.Apellido} (ID: {item.Duenio.IdPropietario})")</td>
                 <td>
                     <a class="btn btn-primary btn-sm custom-link" href="@Url.Action("Edit", new { id = item.IdPropiedad })">
-                        <i class="fas fa-edit fa-2x"></i>
+                        <i class="fas fa-edit"></i>
                     </a>
                     <a class="btn btn-info btn-sm custom-link" href="@Url.Action("Details", new { id = item.IdPropiedad })">
-                        <i class="fas fa-info-circle fa-2x"></i>
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-warning btn-sm custom-link" href="#">
+                        <i class="fas fa-pause" style="color: yellow;"></i>
                     </a>
                     <a class="btn btn-danger btn-sm custom-link"
                         href="@Url.Action("Delete", new { id = item.IdPropiedad })">
-                        <i class="fas fa-trash-alt fa-2x"></i>
+                        <i class="fas fa-trash-alt"></i>
                     </a>
+
                 </td>
             </tr>
         }
@@ -87,4 +91,3 @@
         </ul>
     </nav>
 </div>
-

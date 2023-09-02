@@ -61,10 +61,12 @@ aria-expanded="false" aria-label="Toggle navigation">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="~/js/layout.js"></script>
+    <link rel="icon" href="~/img/logo.jpg" type="image" />
 
 
 
     <link rel="stylesheet" href="~/css/inquilinos.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
 
     <style>
         .navbar-nav .dropdown-menu a.dropdown-item:hover,
@@ -82,82 +84,85 @@ aria-expanded="false" aria-label="Toggle navigation">
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inmobiliaria H</a>
+                <a class="navbar-logo" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.jpg" alt="Logo Inmobiliaria H" height="40">
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse justify-content-center mr-5">
+                    <ul class="navbar-nav justify-content-center mr-5">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home"
                                 asp-action="Index">Inicio</a>
                         </li>
 
                         <li class="nav-item dropdown dropdown-hover">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="propietariosDropdown"
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="propietariosDropdown"
                                 role="button" aria-expanded="false">
                                 Propietarios
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="propietariosDropdown">
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="propietariosDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Propietarios"
-                                        asp-action="Index">Ver Propietarios</a>
+                                    <a class="dropdown-item bg-dark text-white" asp-area=""
+                                        asp-controller="Propietarios" asp-action="Index">Ver Propietarios</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Propietarios"
-                                        asp-action="Create">Crear Propietario</a>
+                                    <a class="dropdown-item bg-dark text-white" asp-area=""
+                                        asp-controller="Propietarios" asp-action="Create">Crear Propietario</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown dropdown-hover">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="inquilinosDropdown" role="button"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="inquilinosDropdown"
+                                role="button" aria-expanded="false">
                                 Inquilinos
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="inquilinosDropdown">
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="inquilinosDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Inquilinos"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Inquilinos"
                                         asp-action="Index">Ver Inquilinos</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Inquilinos"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Inquilinos"
                                         asp-action="Create">Crear Inquilino</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown dropdown-hover">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="propiedadesDropdown"
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="propiedadesDropdown"
                                 role="button" aria-expanded="false">
                                 Propiedades
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="inquilinosDropdown">
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="inquilinosDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Propiedades"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Propiedades"
                                         asp-action="Index">Ver Propiedades</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Propiedades"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Propiedades"
                                         asp-action="Create">Crear Propiedad</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown dropdown-hover">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="contratosDropdown" role="button"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white " href="#" id="contratosDropdown"
+                                role="button" aria-expanded="false">
                                 Contratos
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="contratosDropdown">
+                            <ul class="dropdown-menu bg-dark" aria-labelledby="contratosDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Contratos"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Contratos"
                                         asp-action="Index">Ver Contratos</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Contratos"
+                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Contratos"
                                         asp-action="Create">Crear Contrato</a>
                                 </li>
                             </ul>
@@ -168,6 +173,7 @@ aria-expanded="false" aria-label="Toggle navigation">
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -175,8 +181,9 @@ aria-expanded="false" aria-label="Toggle navigation">
     </div>
 
     <footer class=" bg-light footer text-muted">
-        <div class="container">
-            &copy; 2023 - test - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container text-center">
+            &copy; 2023 - Inmobiliaria H - Havelka Ignacio - <a asp-area="" asp-controller="Home"
+                asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -186,4 +193,3 @@ aria-expanded="false" aria-label="Toggle navigation">
 </body>
 
 </html>
-
