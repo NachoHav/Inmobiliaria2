@@ -22,7 +22,6 @@ public class PropietariosController : Controller
         {
             var prop = repositorio.ObtenerPropietarios();
 
-            // Calcular el índice de inicio y tomar los elementos de la página actual.
             int startIndex = (page - 1) * pageSize;
             var paginatedProp = prop.Skip(startIndex).Take(pageSize);
 
@@ -139,7 +138,7 @@ public class PropietariosController : Controller
                 p.Apellido.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 p.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-            // Limitar a 10 resultados
+            // Limitar a 9 resultados
         }
         var paginatedPropietarios = propietarios.Take(9);
         return PartialView("_PropietarioTablePartial", paginatedPropietarios);
