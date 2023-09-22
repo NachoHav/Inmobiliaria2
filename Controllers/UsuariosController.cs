@@ -22,6 +22,7 @@ namespace Inmobiliaria2.Controllers
         private readonly IWebHostEnvironment environment;
         private readonly ILogger<UsuariosController> _logger;
 
+
         public UsuariosController(ILogger<UsuariosController> logger, IConfiguration configuration, IWebHostEnvironment environment)
         {
             _logger = logger;
@@ -103,7 +104,12 @@ namespace Inmobiliaria2.Controllers
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var user = repositorioUsuario.ObtenerUsuario(id);
+            if (TempData.ContainsKey("Mensaje"))
+                ViewBag.Mensaje = TempData["Mensaje"];
+            if (TempData.ContainsKey("Error"))
+                ViewBag.Error = TempData["Error"];
+            return View(user);
         }
 
         // POST: Usuarios/Edit/5
@@ -122,6 +128,8 @@ namespace Inmobiliaria2.Controllers
                 return View();
             }
         }
+
+
 
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int id)
@@ -203,6 +211,22 @@ namespace Inmobiliaria2.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View();
             }
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Usuarios");
+        }
+
+        [Authorize]
+        public ActionResult Perfil()
+        {
+            ViewData["Title"] = "Mi perfil";
+            var u = repositorioUsuario.ObtenerPorEmail(User.Identity.Name);
+            ViewBag.Roles = Usuario.ObtenerRoles();
+            return View("Edit", u);
         }
     }
 }
