@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using test.Controllers;
 using test.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 
 namespace Inmobiliaria2.Controllers
 {
@@ -17,15 +18,18 @@ namespace Inmobiliaria2.Controllers
     {
 
         RepositorioUsuario repositorioUsuario = new();
-        private readonly ILogger<UsuariosController> _logger;
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment environment;
+        private readonly ILogger<UsuariosController> _logger;
 
-        public UsuariosController(ILogger<UsuariosController> logger)
+        public UsuariosController(ILogger<UsuariosController> logger, IConfiguration configuration, IWebHostEnvironment environment)
         {
             _logger = logger;
+            this.configuration = configuration;
+            this.environment = environment;
         }
         // GET: Usuarios
-        //[Authorize(Policy = "Administrador")]
+        // [Authorize(Policy = "Administrador")]
         public ActionResult Index()
         {
             var usuarios = repositorioUsuario.ObtenerUsuarios();
@@ -41,7 +45,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Usuarios/Create
-        [Authorize(Policy = "Administrador")]
+        //[Authorize(Policy = "Administrador")]
         public ActionResult Create()
         {
             ViewBag.roles = Usuario.ObtenerRoles();
@@ -51,24 +55,50 @@ namespace Inmobiliaria2.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Administrador")]
-        /*public ActionResult Create(Usuario user)
+        //[Authorize(Policy = "Administrador")]
+        public ActionResult Create(Usuario u)
         {
-            if (!ModelState.IsValid)
-                return View();
+            // if (!ModelState.IsValid)
+            //     return View();
             try
             {
-                string hash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                    password: user.Password
-                //salt: System.Text.Encoding.ASCII.GetBytes(configuration)
-                ));
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                password: u.Password,
+                                salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                                prf: KeyDerivationPrf.HMACSHA1,
+                                iterationCount: 1000,
+                                numBytesRequested: 256 / 8));
+                u.Password = hashed;
+                //u.Rol = User.IsInRole("Administrador") ? u.Rol : (int)Roles.Empleado;
+                var nbreRnd = Guid.NewGuid();
+                int res = repositorioUsuario.Alta(u);
+                if (u.AvatarFile != null && u.IdUsuario > 0)
+                {
+                    string wwwPath = environment.WebRootPath;
+                    string path = Path.Combine(wwwPath, "Uploads");
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    //Path.GetFileName(u.AvatarFile.FileName);//este nombre se puede repetir
+                    string fileName = "avatar_" + u.IdUsuario + Path.GetExtension(u.AvatarFile.FileName);
+                    string pathCompleto = Path.Combine(path, fileName);
+                    u.Avatar = Path.Combine("/Uploads", fileName);
+                    // Esta operación guarda la foto en memoria en la ruta que necesitamos
+                    using (FileStream stream = new FileStream(pathCompleto, FileMode.Create))
+                    {
+                        u.AvatarFile.CopyTo(stream);
+                    }
+                    repositorioUsuario.Editar(u);
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Roles = Usuario.ObtenerRoles();
+                return View(ex.Message);
             }
-        }*/
+        }
 
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int id)
@@ -115,7 +145,7 @@ namespace Inmobiliaria2.Controllers
                 return View();
             }
         }
-        /*[AllowAnonymous]
+        [AllowAnonymous]
         // GET: Usuarios/Login/
         public ActionResult Login(string returnUrl)
         {
@@ -123,7 +153,6 @@ namespace Inmobiliaria2.Controllers
             return View();
         }
 
-        // POST: Usuarios/Login/
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -151,9 +180,9 @@ namespace Inmobiliaria2.Controllers
 
                     var claims = new List<Claim>
                     {
-                        new(ClaimTypes.Name, e.Email),
-                        new("FullName", e.Nombre + " " + e.Apellido),
-                        new(ClaimTypes.Role, e.RolNombre),
+                        new Claim(ClaimTypes.Name, e.Email),
+                        new Claim("FullName", e.Nombre + " " + e.Apellido),
+                        new Claim(ClaimTypes.Role, e.RolNombre),
                     };
 
                     var claimsIdentity = new ClaimsIdentity(
@@ -163,7 +192,8 @@ namespace Inmobiliaria2.Controllers
                             CookieAuthenticationDefaults.AuthenticationScheme,
                             new ClaimsPrincipal(claimsIdentity));
                     TempData.Remove("returnUrl");
-                    return Redirect(returnUrl);
+                    //return Redirect(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 }
                 TempData["returnUrl"] = returnUrl;
                 return View();
@@ -173,6 +203,6 @@ namespace Inmobiliaria2.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View();
             }
-        }*/
+        }
     }
 }

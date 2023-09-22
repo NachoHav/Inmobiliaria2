@@ -167,23 +167,25 @@ aria-expanded="false" aria-label="Toggle navigation">
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown dropdown-hover">
-                            <a class="nav-link dropdown-toggle text-white " href="#" id="usuariosDropdown" role="button"
-                                aria-expanded="false">
-                                Usuarios
-                            </a>
-                            <ul class="dropdown-menu bg-dark" aria-labelledby="usuariosDropdown">
-                                <li>
-                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Usuarios"
-                                        asp-action="Index">Ver Usuarios</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Usuarios"
-                                        asp-action="Create">Crear Usuario</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown dropdown-hover">
+                                <a class="nav-link dropdown-toggle text-white " href="#" id="usuariosDropdown" role="button"
+                                    aria-expanded="false">
+                                    Usuarios
+                                </a>
+                                <ul class="dropdown-menu bg-dark" aria-labelledby="usuariosDropdown">
+                                    <li>
+                                        <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Usuarios"
+                                            asp-action="Index">Ver Usuarios</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item bg-dark text-white" asp-area="" asp-controller="Usuarios"
+                                            asp-action="Create">Crear Usuario</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

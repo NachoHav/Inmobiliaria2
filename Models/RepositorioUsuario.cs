@@ -28,10 +28,15 @@ public class RepositorioUsuario
                 command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
                 command.Parameters.AddWithValue("@Email", usuario.Email);
                 command.Parameters.AddWithValue("@Password", usuario.Password);
-                command.Parameters.AddWithValue("@Avatar", usuario.Avatar);
+                if (String.IsNullOrEmpty(usuario.Avatar))
+                    command.Parameters.AddWithValue("@Avatar", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Avatar", usuario.Avatar);
                 command.Parameters.AddWithValue("@Rol", usuario.Rol);
 
                 nuevoUsuarioId = Convert.ToInt32(command.ExecuteScalar());
+                usuario.IdUsuario = nuevoUsuarioId;
+                connection.Close();
             }
         }
         return nuevoUsuarioId;
@@ -61,7 +66,7 @@ public class RepositorioUsuario
         using (MySqlConnection connection = new(connectionString))
         {
             string sql = @"UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, 
-                                Avatar = @avatar, Email = @email, Clave = @clave, Rol = @rol WHERE IdUsuario = @id";
+                                Avatar = @avatar, Email = @email, Password = @Password, Rol = @rol WHERE IdUsuario = @id";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 command.CommandType = CommandType.Text;
@@ -69,7 +74,7 @@ public class RepositorioUsuario
                 command.Parameters.AddWithValue("@apellido", user.Apellido);
                 command.Parameters.AddWithValue("@avatar", user.Avatar);
                 command.Parameters.AddWithValue("@email", user.Email);
-                command.Parameters.AddWithValue("@clave", user.Password);
+                command.Parameters.AddWithValue("@Password", user.Password);
                 command.Parameters.AddWithValue("@rol", user.Rol);
                 command.Parameters.AddWithValue("@id", user.IdUsuario);
                 connection.Open();
@@ -85,7 +90,7 @@ public class RepositorioUsuario
         IList<Usuario> res = new List<Usuario>();
         using (MySqlConnection connection = new(connectionString))
         {
-            string sql = @"SELECT Id, Nombre, Apellido, Avatar, Email, Clave, Rol
+            string sql = @"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol
 					FROM Usuarios WHERE Estado = 1";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
@@ -96,12 +101,12 @@ public class RepositorioUsuario
                 {
                     Usuario user = new()
                     {
-                        IdUsuario = reader.GetInt32("Id"),
+                        IdUsuario = reader.GetInt32("IdUsuario"),
                         Nombre = reader.GetString("Nombre"),
                         Apellido = reader.GetString("Apellido"),
-                        Avatar = reader.GetString("Avatar"),
+                        Avatar = reader.IsDBNull("Avatar") ? null : reader.GetString("Avatar"),
                         Email = reader.GetString("Email"),
-                        Password = reader.GetString("Clave"),
+                        Password = reader.GetString("Password"),
                         Rol = reader.GetInt32("Rol"),
                     };
                     res.Add(user);
@@ -117,7 +122,7 @@ public class RepositorioUsuario
         Usuario usuario = null;
         using (var connection = new MySqlConnection(connectionString))
         {
-            string sql = @$"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Clave, Rol
+            string sql = @$"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol
                     FROM Usuarios WHERE IdUsuario = @id";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
@@ -134,7 +139,7 @@ public class RepositorioUsuario
                         Apellido = reader.GetString("Apellido"),
                         Avatar = reader.GetString("Avatar"),
                         Email = reader.GetString("Email"),
-                        Password = reader.GetString("Clave"),
+                        Password = reader.GetString("Password"),
                         Rol = reader.GetInt32("Rol"),
                     };
                 }
@@ -149,7 +154,7 @@ public class RepositorioUsuario
         Usuario? user = null;
         using (MySqlConnection connection = new(connectionString))
         {
-            string sql = @"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Clave, Rol
+            string sql = @"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol
                     FROM Usuarios WHERE Email = @email";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
@@ -161,12 +166,12 @@ public class RepositorioUsuario
                 {
                     user = new Usuario
                     {
-                        IdUsuario = reader.GetInt32("Id"),
+                        IdUsuario = reader.GetInt32("IdUsuario"),
                         Nombre = reader.GetString("Nombre"),
                         Apellido = reader.GetString("Apellido"),
                         Avatar = reader.GetString("Avatar"),
                         Email = reader.GetString("Email"),
-                        Password = reader.GetString("Clave"),
+                        Password = reader.GetString("Password"),
                         Rol = reader.GetInt32("Rol"),
                     };
                 }
