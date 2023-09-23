@@ -75,8 +75,15 @@ namespace Inmobiliaria2.Controllers
                 int res = repositorioUsuario.Alta(u);
                 if (u.AvatarFile != null && u.IdUsuario > 0)
                 {
-                    string wwwPath = environment.WebRootPath;
-                    string path = Path.Combine(wwwPath, "Uploads");
+                    // Obtén el directorio raíz de la aplicación
+                    var appRoot = AppDomain.CurrentDomain.BaseDirectory;
+
+                    // Luego, construye las rutas relativas desde appRoot
+                    string wwwPath = Path.Combine(appRoot, "wwwroot");
+                    string path = Path.Combine(wwwPath, u.Avatar.TrimStart('/'));
+
+                    // string wwwPath = environment.WebRootPath;
+                    // string path = Path.Combine(wwwPath, "Uploads");
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
@@ -115,18 +122,172 @@ namespace Inmobiliaria2.Controllers
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(Usuario user)
         {
             try
             {
-                // TODO: Add update logic here
+                var originalUser = repositorioUsuario.ObtenerUsuario(user.IdUsuario);
+                user.Avatar = originalUser.Avatar;
+                if (user.Rol == 0 || user.Rol == null)
+                {
+                    // Establece el valor predeterminado (2 para "Empleado")
+                    user.Rol = 2;
+                }
 
-                return RedirectToAction(nameof(Index));
+                repositorioUsuario.Editar(user);
+
+                TempData["Mensaje"] = "Datos guardados correctamente";
+                if (originalUser.Email != user.Email && originalUser.Email == User.Identity.Name)
+                {
+                    await HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+                    return RedirectToAction("Login", "Usuarios");
+                }
+                else if (User.Identity.Name == originalUser.Email)
+                {
+                    // Es el propio perfil del usuario, redirige al perfil
+                    return RedirectToAction("Perfil");
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    // El usuario es un administrador, redirige a la lista de usuarios
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Otro caso, por ejemplo, usuario común editando otro perfil
+                    // Redirige a una página de acceso denegado o realiza otra acción adecuada
+                    return RedirectToAction("AccesoDenegado"); // Personaliza esta acción según tus necesidades
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                ViewBag.StackTrace = ex.StackTrace;
+                return View(user);
             }
+        }
+        [Authorize]
+        public ActionResult CambiarContraseña(int id)
+        {
+            CambioContraseña cambioContraseña = new CambioContraseña();
+            return View(cambioContraseña);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult CambiarContraseña(CambioContraseña modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                // Obtén el usuario actual
+                var usuarioActual = repositorioUsuario.ObtenerPorEmail(User.Identity.Name);
+
+                // Valida la contraseña actual ingresada por el usuario
+                string hashedClaveVieja = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                    password: modelo.ClaveVieja,
+                    salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                    prf: KeyDerivationPrf.HMACSHA1,
+                    iterationCount: 1000,
+                    numBytesRequested: 256 / 8));
+
+                if (usuarioActual.Password == hashedClaveVieja)
+                {
+                    // La contraseña actual es válida, ahora puedes cambiar la contraseña
+
+                    // Hashea la nueva contraseña
+                    string hashedNuevaClave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: modelo.ClaveNueva,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+
+                    // Actualiza la contraseña en la base de datos
+                    usuarioActual.Password = hashedNuevaClave;
+                    repositorioUsuario.CambiarContraseña(usuarioActual);
+
+                    TempData["Mensaje"] = "Contraseña cambiada exitosamente.";
+                    return RedirectToAction("Perfil"); // Puedes redirigir a donde desees después de cambiar la contraseña.
+                }
+                else
+                {
+                    // La contraseña actual ingresada por el usuario es incorrecta
+                    ModelState.AddModelError("ClaveVieja", "La contraseña actual es incorrecta.");
+                }
+            }
+
+            // Si hay errores de validación, muestra la vista nuevamente con los errores.
+            return View(modelo);
+        }
+
+        public IActionResult CambiarAvatar()
+        {
+            // Aquí puedes agregar la lógica para verificar si el usuario actual tiene permiso para cambiar su avatar.
+            // Si no tiene permiso, puedes redirigirlo a una página de acceso denegado.
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CambiarAvatar(IFormFile avatar)
+        {
+            // Procesa la carga de la nueva imagen de avatar y actualiza la base de datos.
+            // Asegúrate de manejar la lógica de validación y manejo de errores aquí.
+
+            var usuarioActual = repositorioUsuario.ObtenerPorEmail(User.Identity.Name);
+
+            if (usuarioActual == null)
+            {
+                // El usuario autenticado no existe en la base de datos, puedes manejar esto como desees.
+                return RedirectToAction("AccesoDenegado"); // Por ejemplo, redirigirlo a una página de acceso denegado.
+            }
+
+            if (avatar != null && avatar.Length > 0)
+            {
+                try
+                {
+                    // Verifica si el usuario ya tenía un avatar y elimina el archivo anterior si existe
+                    if (!string.IsNullOrEmpty(usuarioActual.Avatar))
+                    {
+                        string wwwPath = environment.WebRootPath;
+                        string pathCompleto = Path.Combine(wwwPath, usuarioActual.Avatar.TrimStart('/'));
+
+                        if (System.IO.File.Exists(pathCompleto))
+                        {
+                            System.IO.File.Delete(pathCompleto);
+                        }
+                    }
+
+                    // Guarda la nueva imagen de avatar en el servidor y obtén la ruta
+                    string wwwRoot = environment.WebRootPath;
+                    string fileName = "avatar_" + usuarioActual.IdUsuario + Path.GetExtension(avatar.FileName);
+                    string pathToSave = Path.Combine(wwwRoot, "Uploads", fileName);
+
+                    using (var stream = new FileStream(pathToSave, FileMode.Create))
+                    {
+                        avatar.CopyTo(stream);
+                    }
+
+                    // Actualiza el campo "Avatar" en la base de datos
+                    repositorioUsuario.CambiarAvatar(usuarioActual.IdUsuario, "/Uploads/" + fileName);
+
+                    TempData["Mensaje"] = "Avatar cambiado exitosamente.";
+                    return RedirectToAction("Perfil"); // Puedes redirigir a donde desees después de cambiar el avatar.
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier error que pueda ocurrir durante el proceso
+                    ViewBag.Error = ex.Message;
+                    ViewBag.StackTrace = ex.StackTrace;
+                    return View("CambiarAvatar"); // Redirige de nuevo a la vista de cambio de avatar
+                }
+            }
+
+            // Si no se proporciona un archivo de avatar, muestra un mensaje de error
+            ModelState.AddModelError("avatar", "Por favor, selecciona una imagen de avatar.");
+            return View("CambiarAvatar"); // Redirige de nuevo a la vista de cambio de avatar
         }
 
 
@@ -224,6 +385,7 @@ namespace Inmobiliaria2.Controllers
         public ActionResult Perfil()
         {
             ViewData["Title"] = "Mi perfil";
+            // var u = repositorioUsuario.ObtenerUsuario(id);
             var u = repositorioUsuario.ObtenerPorEmail(User.Identity.Name);
             ViewBag.Roles = Usuario.ObtenerRoles();
             return View("Edit", u);

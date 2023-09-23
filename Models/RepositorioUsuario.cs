@@ -66,7 +66,7 @@ public class RepositorioUsuario
         using (MySqlConnection connection = new(connectionString))
         {
             string sql = @"UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, 
-                                Avatar = @avatar, Email = @email, Password = @Password, Rol = @rol WHERE IdUsuario = @id";
+                                Email = @email, Avatar = @avatar ,Rol = @rol WHERE IdUsuario = @id"; //Agregar Avatar aca
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 command.CommandType = CommandType.Text;
@@ -74,7 +74,6 @@ public class RepositorioUsuario
                 command.Parameters.AddWithValue("@apellido", user.Apellido);
                 command.Parameters.AddWithValue("@avatar", user.Avatar);
                 command.Parameters.AddWithValue("@email", user.Email);
-                command.Parameters.AddWithValue("@Password", user.Password);
                 command.Parameters.AddWithValue("@rol", user.Rol);
                 command.Parameters.AddWithValue("@id", user.IdUsuario);
                 connection.Open();
@@ -84,6 +83,60 @@ public class RepositorioUsuario
         }
         return res;
     }
+    public int CambiarContraseña(Usuario user)
+    {
+        int res = -1;
+        using (MySqlConnection connection = new(connectionString))
+        {
+            string sql = @"UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, 
+                                Email = @email, Avatar = @avatar, Password = @password ,Rol = @rol WHERE IdUsuario = @id"; //Agregar Avatar aca
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@nombre", user.Nombre);
+                command.Parameters.AddWithValue("@apellido", user.Apellido);
+                command.Parameters.AddWithValue("@avatar", user.Avatar);
+                command.Parameters.AddWithValue("@password", user.Password);
+                command.Parameters.AddWithValue("@email", user.Email);
+                command.Parameters.AddWithValue("@rol", user.Rol);
+                command.Parameters.AddWithValue("@id", user.IdUsuario);
+                connection.Open();
+                res = command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        return res;
+    }
+    public int CambiarAvatar(int id, string nuevoAvatar)
+    {
+        try
+        {
+            int res = -1;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                string sql = "UPDATE Usuarios SET Avatar = @nuevoAvatar WHERE IdUsuario = @id";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.AddWithValue("@nuevoAvatar", nuevoAvatar);
+                    command.Parameters.AddWithValue("@id", id);
+                    connection.Open();
+                    res = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            return res;
+        }
+        catch (Exception ex)
+        {
+            // Manejar la excepción aquí, por ejemplo, registrándola o lanzándola nuevamente.
+            throw;
+        }
+    }
+
+
+
 
     public IList<Usuario> ObtenerUsuarios()
     {
