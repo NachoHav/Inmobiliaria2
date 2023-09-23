@@ -39,9 +39,12 @@
                         class="btn btn-success btn-sm custom-link">
                         <i class="fas fa-dollar-sign fa-2x"></i>
                     </a>
-                    <a class="btn btn-danger btn-sm custom-link" href="@Url.Action("Delete", new { id = item.IdContrato })">
-                        <i class="fas fa-trash-alt fa-2x"></i>
-                    </a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger btn-sm custom-link" href="@Url.Action("Delete", new { id = item.IdContrato })">
+                            <i class="fas fa-trash-alt fa-2x"></i>
+                        </a>
+                    }
 
                 </td>
             </tr>

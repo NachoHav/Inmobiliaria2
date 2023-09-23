@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using test.Models;
@@ -110,6 +111,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Contratos/Delete/5
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id)
         {
             var contrato = repositorioContrato.ObtenerPorId(id);
@@ -123,6 +125,7 @@ namespace Inmobiliaria2.Controllers
         // POST: Contratos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id, Contrato contrato)
         {
             try

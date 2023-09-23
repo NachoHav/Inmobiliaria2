@@ -263,9 +263,9 @@ public class RepositorioPropiedad
         using (var connection = new MySqlConnection(connectionString))
         {
             string sql = @$"
-					SELECT {nameof(Propiedad.IdPropiedad)}, Nombre, Descripcion, Precio, Direccion, Habitaciones, Banos, Area, PropietarioId, p.Nombre, p.Apellido
+					SELECT {nameof(Propiedad.IdPropiedad)}, prop.Nombre, Descripcion, Precio, Direccion, Habitaciones, Banos, Area, PropietarioId, p.Nombre, p.Apellido
 					FROM Propiedades prop JOIN Propietarios p ON prop.PropietarioId = p.IdPropietario
-					WHERE PropietarioId=@idPropietario";
+					WHERE PropietarioId=@idPropietario AND prop.Estado = 1";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 command.Parameters.Add("@idPropietario", MySqlDbType.Int32).Value = idPropietario;

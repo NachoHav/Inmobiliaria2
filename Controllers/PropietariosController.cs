@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using test.Models;
 
@@ -91,6 +92,7 @@ public class PropietariosController : Controller
         }
     }
 
+    [Authorize(Policy = "Admin")]
     public ActionResult Delete(int id)
     {
         var propietario = repositorio.ObtenerPorId(id);
@@ -101,9 +103,10 @@ public class PropietariosController : Controller
         return View(propietario);
     }
 
-    // POST: Inmueble/Eliminar/5
+
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "Admin")]
     public ActionResult Delete(int id, Propietario propietario)
     {
         try
@@ -127,20 +130,20 @@ public class PropietariosController : Controller
     }
 
 
-    public IActionResult Search(string searchTerm)
-    {
-        var propietarios = repositorio.ObtenerPropietarios();
+    // public IActionResult Search(string searchTerm)
+    // {
+    //     var propietarios = repositorio.ObtenerPropietarios();
 
-        if (!string.IsNullOrEmpty(searchTerm))
-        {
-            propietarios = propietarios.Where(p =>
-                p.Nombre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                p.Apellido.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                p.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-            // Limitar a 9 resultados
-        }
-        var paginatedPropietarios = propietarios.Take(9);
-        return PartialView("_PropietarioTablePartial", paginatedPropietarios);
-    }
+    //     if (!string.IsNullOrEmpty(searchTerm))
+    //     {
+    //         // propietarios = propietarios.Where(p =>
+    //         //     p.Nombre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+    //         //     p.Apellido.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+    //         //     p.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+    //         //     .ToList();
+    //         // // Limitar a 9 resultados
+    //     }
+    //     var paginatedPropietarios = propietarios.Take(9);
+    //     return PartialView("_PropietarioTablePartial", paginatedPropietarios);
+    // }
 }

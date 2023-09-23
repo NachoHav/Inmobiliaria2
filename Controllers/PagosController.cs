@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using test.Models;
@@ -120,6 +121,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Pagos/Delete/5
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -128,6 +130,7 @@ namespace Inmobiliaria2.Controllers
         // POST: Pagos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try

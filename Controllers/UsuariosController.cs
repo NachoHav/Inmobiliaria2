@@ -30,7 +30,7 @@ namespace Inmobiliaria2.Controllers
             this.environment = environment;
         }
         // GET: Usuarios
-        // [Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "Admin")]
         public ActionResult Index()
         {
             var usuarios = repositorioUsuario.ObtenerUsuarios();
@@ -38,7 +38,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Usuarios/Details/5
-        [Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "Admin")]
         public ActionResult Details(int id)
         {
             var user = repositorioUsuario.ObtenerUsuario(id);
@@ -46,7 +46,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Usuarios/Create
-        //[Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "Admin")]
         public ActionResult Create()
         {
             ViewBag.roles = Usuario.ObtenerRoles();
@@ -56,7 +56,7 @@ namespace Inmobiliaria2.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "Admin")]
         public ActionResult Create(Usuario u)
         {
             // if (!ModelState.IsValid)
@@ -109,6 +109,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Usuarios/Edit/5
+
         public ActionResult Edit(int id)
         {
             var user = repositorioUsuario.ObtenerUsuario(id);
@@ -293,6 +294,7 @@ namespace Inmobiliaria2.Controllers
 
 
         // GET: Usuarios/Delete/5
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -301,6 +303,7 @@ namespace Inmobiliaria2.Controllers
         // POST: Usuarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try

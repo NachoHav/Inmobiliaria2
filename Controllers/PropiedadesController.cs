@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using test.Models;
@@ -115,6 +116,7 @@ namespace Inmobiliaria2.Controllers
         }
 
         // GET: Propiedades/Delete/5
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id)
         {
             var propiedad = repositorio.ObtenerPorId(id);
@@ -128,6 +130,7 @@ namespace Inmobiliaria2.Controllers
         // POST: Propiedades/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Admin")]
         public ActionResult Delete(int id, Propiedad propiedad)
         {
             try
@@ -198,7 +201,19 @@ namespace Inmobiliaria2.Controllers
             }
         }
 
+        public ActionResult PropiedadesPorPropietario(int id)
+        {
+            try
+            {
+                var propiedades = repositorio.BuscarPorPropietario(id);
 
+                return View("Index", propiedades);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
     }
 }

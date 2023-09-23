@@ -24250,6 +24250,11 @@
       "FilePath": "d:\\ULP\\net\\test\\Inmobiliaria2\\Views\\Propiedades\\Pausadas.cshtml",
       "TargetPath": "Views\\Propiedades\\Pausadas.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\ULP\\net\\test\\Inmobiliaria2\\Views\\Home\\Denegado.cshtml",
+      "TargetPath": "Views\\Home\\Denegado.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }

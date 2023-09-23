@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using test.Models;
 
@@ -54,6 +55,7 @@ public class InquilinosController : Controller
         }
     }
 
+    [Authorize(Policy = "Admin")]
     public ActionResult Delete(int id)
     {
         var inquilino = ri.ObtenerPorId(id);
@@ -67,6 +69,7 @@ public class InquilinosController : Controller
     // POST: Inmueble/Eliminar/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "Admin")]
     public ActionResult Delete(int id, Inquilino inquilino)
     {
         try
