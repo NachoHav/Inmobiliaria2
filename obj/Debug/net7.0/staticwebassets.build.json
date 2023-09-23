@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PjpNyIaRQGRdB4uc+U8Q44NOgmYgMy3tfJDx0D2o2ic=",
+  "Hash": "K94v6/vnyRviYlsi9KKiw+lyjQlgh3+ngy8CvwnEf14=",
   "Source": "test",
   "BasePath": "_content/test",
   "Mode": "Default",
@@ -1307,6 +1307,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\avatar_17.png"
+    },
+    {
+      "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\Uploads\\avatar_19.png",
+      "SourceId": "test",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\",
+      "BasePath": "_content/test",
+      "RelativePath": "Uploads/avatar_19.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\avatar_19.png"
     },
     {
       "Identity": "D:\\ULP\\net\\test\\Inmobiliaria2\\wwwroot\\Uploads\\avatar_2.png",

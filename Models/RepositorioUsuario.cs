@@ -175,8 +175,7 @@ public class RepositorioUsuario
         Usuario usuario = null;
         using (var connection = new MySqlConnection(connectionString))
         {
-            string sql = @$"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol
-                    FROM Usuarios WHERE IdUsuario = @id";
+            string sql = "SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol FROM Usuarios WHERE IdUsuario = @id";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 command.Parameters.Add("@id", MySqlDbType.Int32).Value = id;
@@ -190,11 +189,16 @@ public class RepositorioUsuario
                         IdUsuario = reader.GetInt32(nameof(Usuario.IdUsuario)),
                         Nombre = reader.GetString("Nombre"),
                         Apellido = reader.GetString("Apellido"),
-                        Avatar = reader.GetString("Avatar"),
                         Email = reader.GetString("Email"),
                         Password = reader.GetString("Password"),
                         Rol = reader.GetInt32("Rol"),
                     };
+
+                    // Verifica si el campo Avatar no es nulo antes de intentar obtenerlo
+                    if (!reader.IsDBNull(reader.GetOrdinal("Avatar")))
+                    {
+                        usuario.Avatar = reader.GetString("Avatar");
+                    }
                 }
                 connection.Close();
             }
@@ -202,13 +206,14 @@ public class RepositorioUsuario
         return usuario;
     }
 
+
     public Usuario ObtenerPorEmail(string email)
     {
-        Usuario? user = null;
-        using (MySqlConnection connection = new(connectionString))
+        Usuario user = null;
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             string sql = @"SELECT IdUsuario, Nombre, Apellido, Avatar, Email, Password, Rol
-                    FROM Usuarios WHERE Email = @email";
+                FROM Usuarios WHERE Email = @email";
             using (MySqlCommand command = new MySqlCommand(sql, connection))
             {
                 command.CommandType = CommandType.Text;
@@ -222,15 +227,21 @@ public class RepositorioUsuario
                         IdUsuario = reader.GetInt32("IdUsuario"),
                         Nombre = reader.GetString("Nombre"),
                         Apellido = reader.GetString("Apellido"),
-                        Avatar = reader.GetString("Avatar"),
                         Email = reader.GetString("Email"),
                         Password = reader.GetString("Password"),
                         Rol = reader.GetInt32("Rol"),
                     };
+
+                    // Verifica si el campo Avatar no es nulo antes de intentar obtenerlo
+                    if (!reader.IsDBNull(reader.GetOrdinal("Avatar")))
+                    {
+                        user.Avatar = reader.GetString("Avatar");
+                    }
                 }
                 connection.Close();
             }
         }
         return user;
     }
+
 }
