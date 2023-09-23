@@ -24240,6 +24240,16 @@
       "FilePath": "d:\\ULP\\net\\test\\Inmobiliaria2\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\ULP\\net\\test\\Inmobiliaria2\\Views\\Propiedades\\Pausar.cshtml",
+      "TargetPath": "Views\\Propiedades\\Pausar.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\ULP\\net\\test\\Inmobiliaria2\\Views\\Propiedades\\Pausadas.cshtml",
+      "TargetPath": "Views\\Propiedades\\Pausadas.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }

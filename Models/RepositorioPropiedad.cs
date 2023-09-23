@@ -89,6 +89,42 @@ public class RepositorioPropiedad
         return res;
     }
 
+    public int Pausar(int id)
+    {
+        int res = -1;
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            string sql = @$"UPDATE Propiedades SET Estado = 2 WHERE IdPropiedad = @id";
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                res = command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        return res;
+    }
+
+    public int Activar(int id)
+    {
+        int res = -1;
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            string sql = @$"UPDATE Propiedades SET Estado = 1 WHERE IdPropiedad = @id";
+            using (MySqlCommand command = new MySqlCommand(sql, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                res = command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        return res;
+    }
+
 
     public List<Propiedad> ObtenerPropiedades()
     {
@@ -99,6 +135,49 @@ public class RepositorioPropiedad
 					p.Nombre as propietarioNombre, p.Apellido
 					FROM Propiedades prop INNER JOIN Propietarios p ON prop.PropietarioId = p.IdPropietario
                     WHERE prop.Estado = 1";
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                connection.Open();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Propiedad propiedad = new Propiedad
+                        {
+                            IdPropiedad = reader.GetInt32("IdPropiedad"),
+                            Nombre = reader.GetString("Nombre"),
+                            Descripcion = reader.GetString("Descripcion"),
+                            Precio = reader.GetDecimal("Precio"),
+                            Direccion = reader.GetString("Direccion"),
+                            Habitaciones = reader.GetInt32("Habitaciones"),
+                            Banos = reader.GetInt32("Banos"),
+                            Area = reader.GetDouble("Area"),
+                            PropietarioId = reader.GetInt32("PropietarioId"),
+                            Duenio = new Propietario
+                            {
+                                IdPropietario = reader.GetInt32("PropietarioId"),
+                                Nombre = reader.GetString("propietarioNombre"),
+                                Apellido = reader.GetString("Apellido"),
+                            }
+                        };
+                        res.Add(propiedad);
+                    }
+                }
+                connection.Close();
+            }
+        }
+        return res;
+    }
+
+    public List<Propiedad> ObtenerPropiedadesPausadas()
+    {
+        var res = new List<Propiedad>();
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            var sql = @"SELECT IdPropiedad, prop.nombre, Descripcion, Precio, Direccion, Habitaciones, Banos, Area, PropietarioId,
+					p.Nombre as propietarioNombre, p.Apellido
+					FROM Propiedades prop INNER JOIN Propietarios p ON prop.PropietarioId = p.IdPropietario
+                    WHERE prop.Estado = 2";
             using (MySqlCommand cmd = new MySqlCommand(sql, connection))
             {
                 connection.Open();
@@ -220,4 +299,7 @@ public class RepositorioPropiedad
         }
         return res;
     }
+
+
+
 }

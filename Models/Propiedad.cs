@@ -25,7 +25,7 @@ public class Propiedad
     [Required]
     public double Area { get; set; }
     [Required]
-    public bool Estado { get; set; }
+    public int Estado { get; set; }
 
     [Display(Name = "Dueño")]
     public int PropietarioId { get; set; }

@@ -1,0 +1,60 @@
+@model test.Models.Propiedad
+
+@{
+    ViewData["Title"] = "Pausar Propiedad";
+}
+
+
+<h3 class="text-center">¿Estás seguro de que deseas pausar?</h3>
+<hr>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark text-center">
+                    <h4 class="mb-0">Pausar Propiedad</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-end">ID de la Propiedad</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.IdPropiedad)</dd>
+
+                        <dt class="col-sm-4 text-end">Nombre</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                        <dt class="col-sm-4 text-end">Descripción</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Descripcion)</dd>
+
+                        <dt class="col-sm-4 text-end">Precio</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Precio)</dd>
+
+                        <dt class="col-sm-4 text-end">Dirección</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Direccion)</dd>
+
+                        <dt class="col-sm-4 text-end">Habitaciones</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Habitaciones)</dd>
+
+                        <dt class="col-sm-4 text-end">Baños</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Banos)</dd>
+
+                        <dt class="col-sm-4 text-end">Area</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Area)</dd>
+
+                        <dt class="col-sm-4 text-end">Propietario</dt>
+                        @* <dd class="col-sm-8">@Html.DisplayFor(model =>  $"{model.Duenio.Nombre} {model.Duenio.Apellido} (ID: {model.Duenio.IdPropietario})")</dd> *@
+                        <dd class="col-sm-8">@($"{Model.Duenio.Nombre} {Model.Duenio.Apellido} (ID: {Model.Duenio.IdPropietario})")</dd>
+                    </dl>
+
+                    <div class="text-center mt-4">
+                        <form asp-action="Pausar">
+                            <input type="hidden" asp-for="IdPropiedad" />
+                            <button type="submit" class="btn btn-warning">Pausar</button>
+                            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

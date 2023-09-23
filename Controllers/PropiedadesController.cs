@@ -143,5 +143,62 @@ namespace Inmobiliaria2.Controllers
                 return View(propiedad);
             }
         }
+
+        public ActionResult Pausar(int id)
+        {
+            var propiedad = repositorio.ObtenerPorId(id);
+            if (TempData.ContainsKey("Mensaje"))
+                ViewBag.Mensaje = TempData["Mensaje"];
+            if (TempData.ContainsKey("Error"))
+                ViewBag.Error = TempData["Error"];
+            return View(propiedad);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pausar(int id, Propiedad propiedad)
+        {
+            try
+            {
+                repositorio.Pausar(id);
+                TempData["Mensaje"] = "Pausa realizada correctamente";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+                ViewBag.StackTrate = e.StackTrace;
+                return View(propiedad);
+            }
+        }
+
+        public ActionResult Activar(int id)
+        {
+            repositorio.Activar(id);
+            TempData["Mensaje"] = "Activación realizada correctamente";
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Pausadas(int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var propiedades = repositorio.ObtenerPropiedadesPausadas();
+
+                var paginatedPropiedades = propiedades.Skip((page - 1) * pageSize).Take(pageSize);
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = (int)Math.Ceiling((double)propiedades.Count() / pageSize);
+
+                return View(paginatedPropiedades);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+
     }
 }
