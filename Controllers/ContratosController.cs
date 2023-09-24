@@ -45,6 +45,7 @@ namespace Inmobiliaria2.Controllers
 
 
 
+
         // GET: Contratos/Details/5
         public ActionResult Details(int id)
         {
@@ -151,6 +152,20 @@ namespace Inmobiliaria2.Controllers
                 ViewBag.Error = e.Message;
                 ViewBag.StackTrate = e.StackTrace;
                 return View(contrato);
+            }
+        }
+
+
+        public ActionResult ContratosPorPropiedad([FromRoute] int id)
+        {
+            try
+            {
+                var contratos = repositorioContrato.ObtenerContratosPropiedad(id);
+                return View("Index", contratos);
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
     }

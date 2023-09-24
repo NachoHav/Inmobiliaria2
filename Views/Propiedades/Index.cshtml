@@ -9,11 +9,33 @@
 
 
 <h1 class="text-center">Propiedades</h1>
+
 <a class="explode-btn" asp-action="Create">
     <i class="fas fa-plus-circle fa-2x"></i>
 </a>
 
-<table class="table table-bordered">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form id="searchForm" asp-controller="Propiedades" asp-action="FiltrarPorFechas" method="get"
+                class="form-inline">
+                <div class="form-group mx-sm-2">
+                    <label for="fechaInicio" class="sr-only">Fecha de Inicio:</label>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                        placeholder="Fecha de Inicio" />
+                </div>
+                <div class="form-group mx-sm-2">
+                    <label for="fechaFin" class="sr-only">Fecha de Fin:</label>
+                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha de Fin" />
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered mt-3">
     <thead class="thead-light">
         <tr>
             <th>@Html.DisplayNameFor(model => model.IdPropiedad)</th>

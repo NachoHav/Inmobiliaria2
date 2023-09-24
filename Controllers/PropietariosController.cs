@@ -130,20 +130,4 @@ public class PropietariosController : Controller
     }
 
 
-    // public IActionResult Search(string searchTerm)
-    // {
-    //     var propietarios = repositorio.ObtenerPropietarios();
-
-    //     if (!string.IsNullOrEmpty(searchTerm))
-    //     {
-    //         // propietarios = propietarios.Where(p =>
-    //         //     p.Nombre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-    //         //     p.Apellido.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-    //         //     p.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-    //         //     .ToList();
-    //         // // Limitar a 9 resultados
-    //     }
-    //     var paginatedPropietarios = propietarios.Take(9);
-    //     return PartialView("_PropietarioTablePartial", paginatedPropietarios);
-    // }
 }

@@ -130,7 +130,7 @@ public class RepositorioUsuario
         }
         catch (Exception ex)
         {
-            // Manejar la excepción aquí, por ejemplo, registrándola o lanzándola nuevamente.
+
             throw;
         }
     }
@@ -194,7 +194,7 @@ public class RepositorioUsuario
                         Rol = reader.GetInt32("Rol"),
                     };
 
-                    // Verifica si el campo Avatar no es nulo antes de intentar obtenerlo
+
                     if (!reader.IsDBNull(reader.GetOrdinal("Avatar")))
                     {
                         usuario.Avatar = reader.GetString("Avatar");
@@ -232,7 +232,6 @@ public class RepositorioUsuario
                         Rol = reader.GetInt32("Rol"),
                     };
 
-                    // Verifica si el campo Avatar no es nulo antes de intentar obtenerlo
                     if (!reader.IsDBNull(reader.GetOrdinal("Avatar")))
                     {
                         user.Avatar = reader.GetString("Avatar");

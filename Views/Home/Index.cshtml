@@ -8,8 +8,8 @@
             <div class="card card-with-gradient text-white mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Propiedades en Cartera</h5>
-                    <p class="card-text">Total: 100</p>
-                    <p class="card-text">Disponibles: 80</p>
+                    <p class="card-text">Total: @ViewBag.TotalPropiedades</p>
+                    <p class="card-text">Disponibles: @ViewBag.PropiedadesDisponibles</p>
                 </div>
             </div>
         </div>
@@ -17,8 +17,8 @@
             <div class="card card-with-gradient text-white mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Contratos Activos</h5>
-                    <p class="card-text">Total: 50</p>
-                    <p class="card-text">Vencen Próximamente: 10</p>
+                    <p class="card-text">Total: @ViewBag.TotalContratosActivos</p>
+                    <p class="card-text">Vencen Próximamente: @ViewBag.ContratosVencenProximamente</p>
                 </div>
             </div>
         </div>
@@ -26,29 +26,30 @@
             <div class="card card-with-gradient text-white mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Inquilinos Registrados</h5>
-                    <p class="card-text">Total: 75</p>
-                    <p class="card-text">Nuevos este Mes: 5</p>
+                    <p class="card-text">Total: @ViewBag.TotalInquilinosRegistrados</p>
+
                 </div>
             </div>
         </div>
     </div>
     <div class="d-grid gap-2">
-        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+        <a href="@Url.Action("Create", "Propiedades")" class="btn btn-with-gradient btn-lg" role="button">
             <i class="fas  fa-home"></i> Cargar Propiedad
         </a>
+
     </div>
     <div class="d-grid gap-2 mt-2">
-        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+        <a href="@Url.Action("Create", "Contratos")" class="btn btn-with-gradient btn-lg" role="button">
             <i class="fas  fa-file-contract"></i> Cargar Contrato
         </a>
     </div>
     <div class="d-grid gap-2 mt-2">
-        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+        <a href="@Url.Action("Create", "Inquilinos")" class="btn btn-with-gradient btn-lg" role="button">
             <i class="fas fa-user-plus"></i> Crear Inquilino
         </a>
     </div>
     <div class="d-grid gap-2 mt-2">
-        <a href="#" class="btn btn-with-gradient btn-lg" role="button">
+        <a href="@Url.Action("Create", "Propietarios")" class="btn btn-with-gradient btn-lg" role="button">
             <i class="fas fa-user-tie"></i> Crear Propietario
         </a>
     </div>

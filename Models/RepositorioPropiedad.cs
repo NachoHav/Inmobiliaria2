@@ -300,6 +300,101 @@ public class RepositorioPropiedad
         return res;
     }
 
+    public List<Propiedad> FiltrarPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+    {
+        var propiedadesDisponibles = new List<Propiedad>();
+
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            string sql = @"
+        SELECT IdPropiedad, prop.nombre, Descripcion, Precio, Direccion, Habitaciones, Banos, Area, PropietarioId,
+            p.Nombre as propietarioNombre, p.Apellido
+        FROM Propiedades prop
+        INNER JOIN Propietarios p ON prop.PropietarioId = p.IdPropietario
+        WHERE prop.Estado = 1";
+
+            if (fechaInicio != null && fechaFin != null)
+            {
+                sql += " AND prop.IdPropiedad NOT IN (" +
+                       "SELECT DISTINCT c.PropiedadId " +
+                       "FROM Contratos c " +
+                       "WHERE (c.FechaInicio <= @fechaFin AND c.FechaFin >= @fechaInicio))";
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                if (fechaInicio != null)
+                {
+                    cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                }
+
+                if (fechaFin != null)
+                {
+                    cmd.Parameters.AddWithValue("@fechaFin", fechaFin);
+                }
+
+                cmd.CommandType = CommandType.Text;
+                connection.Open();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Propiedad propiedad = new Propiedad
+                        {
+                            IdPropiedad = reader.GetInt32("IdPropiedad"),
+                            Nombre = reader.GetString("Nombre"),
+                            Descripcion = reader.GetString("Descripcion"),
+                            Precio = reader.GetDecimal("Precio"),
+                            Direccion = reader.GetString("Direccion"),
+                            Habitaciones = reader.GetInt32("Habitaciones"),
+                            Banos = reader.GetInt32("Banos"),
+                            Area = reader.GetDouble("Area"),
+                            PropietarioId = reader.GetInt32("PropietarioId"),
+                            Duenio = new Propietario
+                            {
+                                IdPropietario = reader.GetInt32("PropietarioId"),
+                                Nombre = reader.GetString("propietarioNombre"),
+                                Apellido = reader.GetString("Apellido"),
+                            }
+                        };
+                        propiedadesDisponibles.Add(propiedad);
+                    }
+                }
+                connection.Close();
+            }
+        }
+
+        return propiedadesDisponibles;
+    }
+
+    public int ObtenerNumeroTotalPropiedades()
+    {
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string sql = "SELECT COUNT(*) FROM Propiedades";
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+    }
+
+    public int ObtenerNumeroPropiedadesDisponibles()
+    {
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string sql = "SELECT COUNT(*) FROM Propiedades WHERE Estado = 1";
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+    }
 
 
 }

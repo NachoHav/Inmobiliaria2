@@ -11,6 +11,6 @@ dropdownItems.forEach(item => {
     item.addEventListener('mouseleave', () => {
         timeout = setTimeout(() => {
             item.querySelector('.dropdown-menu').classList.remove('show');
-        }, 300); // Añade una demora de 300 milisegundos (ajusta según tus preferencias)
+        }, 300); 
     });
 });

@@ -4,84 +4,92 @@
 
 }
 
-<h4>Editar Usuario</h4>
-<hr />
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit" class="needs-validation" novalidate>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label">Nombre</label>
-                <input asp-for="Nombre" class="form-control" required />
-                <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label">Apellido</label>
-                <input asp-for="Apellido" class="form-control" required />
-                <div class="invalid-feedback">Por favor, ingresa el apellido.</div>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Email</label>
-                <input asp-for="Email" class="form-control" type="email" required />
-                <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
-            </div>
-            @if (User.Identity.Name == Model.Email)
-            {
-                <div class="form-group">
-                    <a asp-action="CambiarContraseña" asp-route-id="@Model.IdUsuario" class="btn btn-warning">Cambiar
-                        Contraseña</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card ">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title text-center">Editar Usuario</h2>
                 </div>
-            }
+                <div class="card-body">
+                    <form asp-action="Edit" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                @if (!string.IsNullOrEmpty(Model.Avatar))
-                {
-                    <label asp-for="Avatar" class="control-label">Avatar</label>
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label">Nombre</label>
+                            <input asp-for="Nombre" class="form-control" required />
+                            <div class="invalid-feedback">Por favor, ingresa el nombre.</div>
+                        </div>
 
-                    <br />
-                    <img src="@Model.Avatar" width="100" class="img-fluid rounded" />
-                }
-                else
-                {
-                    <p>Sin avatar</p>
-                }
-            </div>
+                        <div class="form-group">
+                            <label asp-for="Apellido" class="control-label">Apellido</label>
+                            <input asp-for="Apellido" class="form-control" required />
+                            <div class="invalid-feedback">Por favor, ingresa el apellido.</div>
+                        </div>
 
-            <div class="form-group">
-                @if (string.IsNullOrEmpty(Model.Avatar))
-                {
-                    <a asp-action="CambiarAvatar" class="btn btn-warning">Agregar Avatar</a>
-                }
-                else
-                {
-                    <a asp-action="CambiarAvatar" class="btn btn-warning">Cambiar Avatar</a>
-                }
-            </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" required />
+                            <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
+                        </div>
 
-            @if (User.IsInRole("Admin"))
-            {
-                <div class="form-group">
-                    <label asp-for="Rol" class="control-label">Rol</label>
-                    <select asp-for="Rol" class="form-control" required>
-                        <option value="1">Admin</option>
-                        <option value="2">Empleado</option>
-                    </select>
-                    <div class="invalid-feedback">Por favor, selecciona un rol.</div>
+                        @if (User.Identity.Name == Model.Email)
+                        {
+                            <div class="form-group">
+                                <a asp-action="CambiarContraseña" asp-route-id="@Model.IdUsuario"
+                                    class="btn btn-warning">Cambiar Contraseña</a>
+                            </div>
+                        }
+
+                        <div class="form-group">
+                            @if (!string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <label asp-for="Avatar" class="control-label">Avatar</label>
+                                <br />
+                                <img src="@Model.Avatar" width="100" class="img-fluid rounded" />
+                            }
+                            else
+                            {
+                                <p>Sin avatar</p>
+                            }
+                        </div>
+
+                        <div class="form-group">
+                            @if (string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <a asp-action="CambiarAvatar" class="btn btn-warning">Agregar Avatar</a>
+                            }
+                            else
+                            {
+                                <a asp-action="CambiarAvatar" class="btn btn-warning">Cambiar Avatar</a>
+                            }
+                        </div>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="form-group">
+                                <label asp-for="Rol" class="control-label">Rol</label>
+                                <select asp-for="Rol" class="form-control" required>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Empleado</option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecciona un rol.</div>
+                            </div>
+                        }
+                        <input type="hidden" asp-for="IdUsuario" />
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    </form>
                 </div>
-            }
-            <input type="hidden" asp-for="IdUsuario" />
-
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
+<div class="text-center mt-3">
     <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
 </div>

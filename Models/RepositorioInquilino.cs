@@ -151,5 +151,23 @@ public class RepositorioInquilino
         return res;
     }
 
+    public int ObtenerNumeroTotalInquilinos()
+    {
+        int totalInquilinos = 0;
+
+        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        {
+            string sql = "SELECT COUNT(*) FROM Inquilinos";
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                connection.Open();
+                totalInquilinos = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+            }
+        }
+
+        return totalInquilinos;
+    }
 
 }

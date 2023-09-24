@@ -7,6 +7,10 @@ namespace test.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly RepositorioPropiedad repositorioPropiedad = new();
+    private readonly RepositorioPropietario repositorioPropietario = new();
+    private readonly RepositorioContrato repositorioContrato = new();
+    private readonly RepositorioInquilino repositorioInquilino = new();
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -15,6 +19,25 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+
+        int totalPropiedades = repositorioPropiedad.ObtenerNumeroTotalPropiedades();
+        int propiedadesDisponibles = repositorioPropiedad.ObtenerNumeroPropiedadesDisponibles();
+
+        int totalContratosActivos = repositorioContrato.ObtenerNumeroTotalContratosActivos();
+        int contratosVencenProximamente = repositorioContrato.ObtenerNumeroContratosVencenProximamente(4);
+
+        int totalInquilinosRegistrados = repositorioInquilino.ObtenerNumeroTotalInquilinos();
+
+
+        ViewBag.TotalPropiedades = totalPropiedades;
+        ViewBag.PropiedadesDisponibles = propiedadesDisponibles;
+
+        ViewBag.TotalContratosActivos = totalContratosActivos;
+        ViewBag.ContratosVencenProximamente = contratosVencenProximamente;
+
+        ViewBag.TotalInquilinosRegistrados = totalInquilinosRegistrados;
+
+
         return View();
     }
 

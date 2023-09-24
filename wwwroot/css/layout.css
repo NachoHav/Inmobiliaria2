@@ -50,15 +50,15 @@ header {
 .navbar-dark .navbar-nav .nav-item.dropdown:hover .nav-link,
 .navbar-dark .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
     background-color: #fffafa !important;
-    /* Cambiar el fondo a gris oscuro al pasar el ratón */
+
     color: white !important;
-    /* Cambiar el color del texto a blanco al pasar el ratón */
+
 }
 
-/* Cambiar el color de fondo de los elementos del menú desplegable al pasar el ratón */
+
 .navbar-dark .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
     background-color: #555 !important;
-    /* Cambiar el color de fondo al pasar el ratón sobre los elementos del menú desplegable */
+
 }
 
 .dropdown-item:hover {

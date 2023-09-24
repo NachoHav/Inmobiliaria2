@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    @* var contratos = (IList<Contrato>)ViewBag.Contratos; *@
+
     var contrato = ViewBag.Contrato;
 }
 
@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card border-primary">
-                <div class="card-header bg-primary text-white text-center">
+                <div class="card-header bg-dark text-white text-center">
                     <h1 class="display-4">Crear Pago</h1>
                 </div>
                 <div class="card-body">
@@ -29,17 +29,7 @@
                             <input type="text" class="form-control custom-input" id="ContratoId" name="ContratoId"
                                 value="@contrato.IdContrato" readonly required>
                         </div>
-                        @* <div class="mb-3">
-                        <label for="ContratoId" class="form-label">Contrato</label>
-                        <select class="form-select custom-input" id="ContratoId" name="ContratoId" required>
-                        <option value="">Selecciona un Contrato</option>
-                        @foreach (var con in contratos)
-                        {
-                        <option value="@con.IdContrato">@con.Propiedad.Direccion @con.Inquilino.Nombre
-                        @con.Inquilino.Apellido</option>
-                        }
-                        </select>
-                        </div> *@
+
                         <div class="text-center">
                             <button class="btn btn-primary btn-lg explode-btn">
                                 <i class="fas fa-save"></i> Guardar
@@ -51,62 +41,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-@* <h1>Create</h1>
-
-<p>
-<a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-<thead>
-<tr>
-<th>
-@Html.DisplayNameFor(model => model.NumeroPago)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Monto)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Fecha)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.ContratoId)
-</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-@foreach (var item in Model)
-{
-<tr>
-<td>
-@Html.DisplayFor(modelItem => item.NumeroPago)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Monto)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Fecha)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.ContratoId)
-</td>
-<td>
-@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-</td>
-</tr>
-}
-</tbody>
-</table> *@

@@ -67,56 +67,40 @@
 </div>
 @section scripts {
     <script>
-        @* $(document).ready(function () {
-        $('#searchInput').on('input', function () {
-        var searchTerm = $(this).val();
+        $(document).ready(function () {
+            var currentPage = 1;
+            var pageSize = 10;
 
-        $.ajax({
-        url: '@Url.Action("Search", "Propietarios")',
-        type: 'GET',
-        data: { searchTerm: searchTerm },
-        success: function (data) {
-        // Actualizar la tabla con los resultados de búsqueda
-        $('#propTableBody').html(data);
-        }
-        });
-        });
-        }); *@
-            $(document).ready(function () {
-                var currentPage = 1;
-                var pageSize = 10; // Número de resultados por página
+            $('#searchInput').on('input', function () {
+                var searchTerm = $(this).val();
 
-                $('#searchInput').on('input', function () {
-                    var searchTerm = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("Search", "Propietarios")',
+                    type: 'GET',
+                    data: { searchTerm: searchTerm },
+                    success: function (data) {
+                        $('#propTableBody').html(data);
 
-                    $.ajax({
-                        url: '@Url.Action("Search", "Propietarios")',
-                        type: 'GET',
-                        data: { searchTerm: searchTerm },
-                        success: function (data) {
-                            $('#propTableBody').html(data);
 
-                            // Actualizar la información del paginador
-                            var totalResults = $('#propTableBody').find('tr').length;
-                            var totalPages = Math.ceil(totalResults / pageSize);
+                        var totalResults = $('#propTableBody').find('tr').length;
+                        var totalPages = Math.ceil(totalResults / pageSize);
 
-                            $('#pagination').empty();
-                            for (var i = 1; i <= totalPages; i++) {
-                                $('#pagination').append($('<li>').addClass('page-item')
-                                    .append($('<a>').addClass('page-link').text(i).attr('data-page', i)));
-                            }
+                        $('#pagination').empty();
+                        for (var i = 1; i <= totalPages; i++) {
+                            $('#pagination').append($('<li>').addClass('page-item')
+                                .append($('<a>').addClass('page-link').text(i).attr('data-page', i)));
                         }
-                    });
-
-                    // Restablecer el paginador a la página 1
-                    currentPage = 1;
+                    }
                 });
 
-                // Manejar la paginación
-                $(document).on('click', '#pagination .page-link', function () {
-                    currentPage = parseInt($(this).attr('data-page'));
-                    // Realizar otra búsqueda o cargar resultados según la página seleccionada
-                });
+
+                currentPage = 1;
             });
+
+            $(document).on('click', '#pagination .page-link', function () {
+                currentPage = parseInt($(this).attr('data-page'));
+
+            });
+        });
     </script>
 }

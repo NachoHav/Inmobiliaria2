@@ -16,6 +16,7 @@ namespace Inmobiliaria2.Controllers
 
         private readonly RepositorioPropiedad repositorio = new RepositorioPropiedad();
         private readonly RepositorioPropietario repoPropietario = new RepositorioPropietario();
+        private readonly RepositorioContrato repositorioContrato = new RepositorioContrato();
 
         private readonly ILogger<PropiedadesController> _logger;
 
@@ -214,6 +215,16 @@ namespace Inmobiliaria2.Controllers
                 throw;
             }
         }
+        public ActionResult FiltrarPorFechas(DateTime fechaInicio, DateTime fechaFin)
+        {
+
+            var propiedadesDisponibles = repositorio.FiltrarPorFechas(fechaInicio, fechaFin);
+
+            return View("Index", propiedadesDisponibles);
+        }
+
+
+
 
     }
 }

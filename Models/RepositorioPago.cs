@@ -12,33 +12,6 @@ public class RepositorioPago
         connectionString = "Server=localhost;User=root;Password='';Database=test;SslMode=none";
     }
 
-
-    // public int Alta(Pago pago)
-    // {
-    //     int res = -1;
-
-    //     using (var connection = new MySqlConnection(connectionString))
-    //     {
-    //         string sql = @"INSERT INTO Pagos (NumeroPago, Monto, Fecha, ContratoId)
-    //                         VALUES (@numeroPago, @monto, @fecha, @contratoId);
-    //                         SELECT LAST_INSERT_ID();";
-
-    //         using (var command = new MySqlCommand(sql, connection))
-    //         {
-    //             command.CommandType = CommandType.Text;
-    //             command.Parameters.AddWithValue("@numeroPago", pago.NumeroPago);
-    //             command.Parameters.AddWithValue("@monto", pago.Monto);
-    //             command.Parameters.AddWithValue("@fecha", pago.Fecha);
-    //             command.Parameters.AddWithValue("@contratoId", pago.ContratoId);
-    //             connection.Open();
-    //             res = Convert.ToInt32(command.ExecuteScalar());
-    //             pago.IdPago = res;
-    //             connection.Close();
-    //         }
-    //     }
-    //     return res;
-    // }
-
     public int Alta(Pago pago)
     {
         int res = -1;

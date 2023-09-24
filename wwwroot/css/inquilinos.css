@@ -21,12 +21,12 @@
 
 .custom-link {
     text-decoration: none;
-    /* Eliminamos la decoración de texto en los enlaces */
+
 }
 
 .custom-link:hover {
     transform: scale(1.05);
-    /* Efecto de escalado al pasar el cursor */
+
 }
 
 .no-underline a {
@@ -40,7 +40,7 @@
 
 .custom-input:hover {
     border-color: #66afe9;
-    /* Cambia el color del borde al pasar el mouse */
+
     box-shadow: 0 0 18px rgba(102, 175, 233, 0.6);
-    /* Agrega una sombra suave */
+
 }
