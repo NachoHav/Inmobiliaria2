@@ -8,7 +8,27 @@
 <a class="explode-btn" asp-action="Create">
     <i class="fas fa-plus-circle fa-2x"></i>
 </a>
-<table class="table">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form id="searchForm" asp-controller="Contratos" asp-action="Index" method="get" class="form-inline">
+
+                <div class="form-group mx-sm-2">
+                    <label for="fechaInicio" class="sr-only">Fecha de Inicio:</label>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                        placeholder="Fecha de Inicio" />
+                </div>
+                <div class="form-group mx-sm-2">
+                    <label for="fechaFin" class="sr-only">Fecha de Fin:</label>
+                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha de Fin" />
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table class="table mt-3">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.IdContrato)</th>
@@ -51,3 +71,17 @@
         }
     </tbody>
 </table>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchForm = document.getElementById("searchForm");
+        const fechaInicioInput = document.getElementById("fechaInicio");
+        const fechaFinInput = document.getElementById("fechaFin");
+
+        searchForm.addEventListener("submit", function (event) {
+            if (!fechaInicioInput.value || !fechaFinInput.value) {
+                event.preventDefault(); // Evita que el formulario se envíe
+                alert("Debes ingresar ambas fechas antes de buscar.");
+            }
+        });
+    });
+</script>

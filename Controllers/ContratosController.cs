@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -21,18 +22,28 @@ namespace Inmobiliaria2.Controllers
             _logger = logger;
         }
         // GET: Contratos
-        public ActionResult Index()
+        public ActionResult Index(DateTime? fechaInicio, DateTime? fechaFin)
         {
             try
             {
-                var contratos = repositorioContrato.ObtenerContratos();
-                return View(contratos);
+                if (fechaInicio == null && fechaFin == null)
+                {
+                    return View(repositorioContrato.ObtenerContratos());
+                }
+                else
+                {
+                    var contratos = repositorioContrato.ObtenerContratosPorFechas(fechaInicio, fechaFin);
+                    return View(contratos);
+                }
             }
             catch (Exception e)
             {
                 throw;
             }
         }
+
+
+
 
         // GET: Contratos/Details/5
         public ActionResult Details(int id)

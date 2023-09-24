@@ -183,6 +183,141 @@ public class RepositorioContrato
         return contrato;
     }
 
+
+    // public List<Contrato> ObtenerContratosPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+    // {
+    //     var res = new List<Contrato>();
+    //     using (var connection = new MySqlConnection(connectionString))
+    //     {
+    //         string sql = @"SELECT IdContrato, FechaInicio, FechaFin, PropiedadId, InquilinoId, c.Estado,
+    //                     i.IdInquilino, i.Nombre as inquilinoNombre, i.Apellido as inquilinoApellido, 
+    //                     p.IdPropiedad, p.Nombre as propiedadNombre, p.Direccion as propiedadDireccion
+    //                     FROM Contratos c
+    //                     INNER JOIN Propiedades p ON c.PropiedadId = p.IdPropiedad 
+    //                     INNER JOIN Inquilinos i ON c.InquilinoId = i.IdInquilino
+    //                     WHERE c.Estado = 1       AND FechaInicio <= @fechaFin    AND FechaFin >= @fechaInicio                 ";
+    //         // string sql = "SELECT * WHERE FechaInicio <= @fechaFin AND FechaFin >= @fechaInicio FROM Contratos";
+
+
+
+
+
+    //         using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+    //         {
+
+    //             cmd.Parameters.Add("@fechaInicio", MySqlDbType.Date).Value = fechaInicio;
+    //             cmd.Parameters.Add("@fechaFin", MySqlDbType.Date).Value = fechaFin;
+
+
+    //             connection.Open();
+    //             using (MySqlDataReader reader = cmd.ExecuteReader())
+    //             {
+    //                 while (reader.Read())
+    //                 {
+    //                     Contrato contrato = new Contrato
+    //                     {
+    //                         IdContrato = reader.GetInt32("IdContrato"),
+    //                         FechaInicio = reader.GetDateTime("FechaInicio"),
+    //                         FechaFin = reader.GetDateTime("FechaFin"),
+    //                         PropiedadId = reader.GetInt32("PropiedadId"),
+    //                         InquilinoId = reader.GetInt32("InquilinoId"),
+    //                         Estado = reader.GetInt32("Estado"),
+    //                         Inquilino = new Inquilino
+    //                         {
+    //                             IdInquilino = reader.GetInt32("IdInquilino"),
+    //                             Nombre = reader.GetString("inquilinoNombre"),
+    //                             Apellido = reader.GetString("inquilinoApellido"),
+    //                         },
+    //                         Propiedad = new Propiedad
+    //                         {
+    //                             IdPropiedad = reader.GetInt32("IdPropiedad"),
+    //                             Nombre = reader.GetString("propiedadNombre"),
+    //                             Direccion = reader.GetString("propiedadDireccion"),
+    //                         }
+    //                     };
+    //                     res.Add(contrato);
+    //                 }
+    //             }
+
+    //             connection.Close();
+    //         }
+    //     }
+    //     return res;
+    // }
+    public List<Contrato> ObtenerContratosPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+    {
+        var res = new List<Contrato>();
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            string sql = @"SELECT IdContrato, FechaInicio, FechaFin, PropiedadId, InquilinoId, c.Estado,
+                    i.IdInquilino, i.Nombre as inquilinoNombre, i.Apellido as inquilinoApellido, 
+                    p.IdPropiedad, p.Nombre as propiedadNombre, p.Direccion as propiedadDireccion
+                    FROM Contratos c
+                    INNER JOIN Propiedades p ON c.PropiedadId = p.IdPropiedad 
+                    INNER JOIN Inquilinos i ON c.InquilinoId = i.IdInquilino
+                    WHERE c.Estado = 1";
+
+            if (fechaInicio != null)
+            {
+                sql += " AND FechaInicio <= @fechaFin";
+            }
+
+            if (fechaFin != null)
+            {
+                sql += " AND FechaFin >= @fechaInicio";
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+            {
+                if (fechaInicio != null)
+                {
+                    cmd.Parameters.Add("@fechaInicio", MySqlDbType.Date).Value = fechaInicio;
+                }
+
+                if (fechaFin != null)
+                {
+                    cmd.Parameters.Add("@fechaFin", MySqlDbType.Date).Value = fechaFin;
+                }
+
+                connection.Open();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Contrato contrato = new Contrato
+                        {
+                            IdContrato = reader.GetInt32("IdContrato"),
+                            FechaInicio = reader.GetDateTime("FechaInicio"),
+                            FechaFin = reader.GetDateTime("FechaFin"),
+                            PropiedadId = reader.GetInt32("PropiedadId"),
+                            InquilinoId = reader.GetInt32("InquilinoId"),
+                            Estado = reader.GetInt32("Estado"),
+                            Inquilino = new Inquilino
+                            {
+                                IdInquilino = reader.GetInt32("IdInquilino"),
+                                Nombre = reader.GetString("inquilinoNombre"),
+                                Apellido = reader.GetString("inquilinoApellido"),
+                            },
+                            Propiedad = new Propiedad
+                            {
+                                IdPropiedad = reader.GetInt32("IdPropiedad"),
+                                Nombre = reader.GetString("propiedadNombre"),
+                                Direccion = reader.GetString("propiedadDireccion"),
+                            }
+                        };
+                        res.Add(contrato);
+                    }
+                }
+
+                connection.Close();
+            }
+        }
+        return res;
+    }
+
+
+
+
     //BUSCAR POR INQUILINO
     //BUSCAR POR PROPIEDAD
     //BUSCAR POR FECHAS
